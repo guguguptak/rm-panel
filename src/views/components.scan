@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then
+  name="index.vue.js"
+ else
+  name="$1"
+fi
+
+total=0
+
+for dir in *; do
+  f=$dir/$name
+  if [[ -e "$f" ]]; then
+    for comp in `\
+      awk '/components: {/{flag=1;next}/}/{flag=0}flag' $f \
+      | perl -pe 's/,//g' \
+      | perl -pe 's/([[:lower:]])([[:upper:]])/\1-\l\2/g' \
+      | perl -pe 's/([[:upper:]])/\l\1/g' \
+      `; do
+       f2=`perl -pe 's/js/html/g' <<< $f`
+      count=`grep -c -e "$comp" "$f2"`
+      if [ "$count" -eq "0" ]; then
+        echo unused $comp in $f2
+        ((total++))
+      fi
+    done
+  fi
+done
+
+echo unused component total: $total

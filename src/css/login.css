@@ -1,0 +1,274 @@
+html, body {
+  height: 100%;
+}
+
+html {
+    font-size: 16px;
+    background-color: #f5f5f5;
+}
+
+body {
+    color: #4a4a4a;
+    /* font-size: 1rem; */
+    /* font-weight: 400; */
+    line-height: 1.5;
+}
+
+body, button, input, select, textarea {
+    font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+button, input, select, textarea {
+    margin: 0;
+}
+
+hr {
+    background-color: #dbdbdb;
+    border: none;
+    display: block;
+    height: 1px;
+    margin: 1.5rem 0;
+}
+
+p {
+    margin: 0;
+}
+
+.vlabel:not(:last-child) {
+    margin-bottom: .5em;
+}
+
+.vlabel {
+    color: #363636;
+    display: block;
+    /* font-size: 1rem; */
+    font-weight: 700;
+}
+
+.vinput.is-info,
+.vtextarea.is-info {
+/*    border-color: #209cee */
+}
+
+.vinput.is-info.is-active,
+.vinput.is-info.is-focused,
+.vinput.is-info:active,
+.vinput.is-info:focus,
+.vtextarea.is-info.is-active,
+.vtextarea.is-info.is-focused,
+.vtextarea.is-info:active,
+.vtextarea.is-info:focus {
+    box-shadow: 0 0 0 .125em rgba(32, 156, 238, .25)
+}
+
+.vinput.is-active, .vinput.is-focused, .vinput:active, .vinput:focus,
+ .vtextarea.is-active, .vtextarea.is-focused, .vtextarea:active, .vtextarea:focus {
+    outline: none;
+}
+
+.vinput, .vtextarea {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding: 0.5rem 1rem;
+    position: relative;
+    vertical-align: top;
+    background-color: #fff;
+    border-color: #dbdbdb;
+    color: #363636;
+    -webkit-box-shadow: inset 0 1px 2px hsla(0,0%,4%,.1);
+    box-shadow: inset 0 1px 2px hsla(0,0%,4%,.1);
+    max-width: 100%;
+    width: calc( 100% - 2rem );
+    font-size: 1rem;
+}
+
+.vbutton.is-info {
+ background-color:#209cee;
+ border-color:transparent;
+ color:#fff
+}
+.vbutton.is-info.is-hovered,.vbutton.is-info:hover {
+ background-color:#1496ed;
+ border-color:transparent;
+ color:#fff
+}
+.vbutton.is-info.is-focused,.vbutton.is-info:focus {
+ border-color:transparent;
+ color:#fff
+}
+.vbutton.is-info.is-focused:not(:active),.vbutton.is-info:focus:not(:active) {
+ box-shadow:0 0 0 .125em rgba(32,156,238,.25)
+}
+.vbutton.is-info.is-active,.vbutton.is-info:active {
+ background-color:#118fe4;
+ border-color:transparent;
+ color:#fff
+}
+.vbutton.is-info[disabled] {
+ background-color:#209cee;
+ border-color:transparent;
+ box-shadow:none
+}
+.vbutton.is-info.is-inverted {
+ background-color:#fff;
+ color:#209cee
+}
+.vbutton.is-info.is-inverted:hover {
+ background-color:#f2f2f2
+}
+.vbutton.is-info.is-inverted[disabled] {
+ background-color:#fff;
+ border-color:transparent;
+ box-shadow:none;
+ color:#209cee
+}
+.vbutton.is-info.is-loading:after {
+ border-color:transparent transparent #fff #fff!important
+}
+.vbutton.is-info.is-outlined {
+ background-color:transparent;
+ border-color:#209cee;
+ color:#209cee
+}
+.vbutton.is-info.is-outlined:focus,.vbutton.is-info.is-outlined:hover {
+ background-color:#209cee;
+ border-color:#209cee;
+ color:#fff
+}
+.vbutton.is-info.is-outlined.is-loading:after {
+ border-color:transparent transparent #209cee #209cee!important
+}
+.vbutton.is-info.is-outlined[disabled] {
+ background-color:transparent;
+ border-color:#209cee;
+ box-shadow:none;
+ color:#209cee
+}
+.vbutton.is-info.is-inverted.is-outlined {
+ background-color:transparent;
+ border-color:#fff;
+ color:#fff
+}
+.vbutton.is-info.is-inverted.is-outlined:focus,.vbutton.is-info.is-inverted.is-outlined:hover {
+ background-color:#fff;
+ color:#209cee
+}
+.vbutton.is-info.is-inverted.is-outlined[disabled] {
+ background-color:transparent;
+ border-color:#fff;
+ box-shadow:none;
+ color:#fff
+}
+
+.vbutton.is-active, .vbutton:active {
+    border-color: #4a4a4a;
+    color: #363636;
+}
+
+.vbutton.is-hovered, .vbutton:hover {
+    border-color: #b5b5b5;
+    color: #363636;
+}
+
+.vbutton.is-active, .vbutton.is-focused, .vbutton:active, .vbutton:focus {
+    outline: none;
+}
+
+.vbutton {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    font-size: 1rem;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    line-height: 1.5;
+    position: relative;
+    vertical-align: top;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #fff;
+    border-color: #dbdbdb;
+    color: #363636;
+    cursor: pointer;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 1rem 1rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.vcontent:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: .5em;
+    font-weight: 400;
+}
+
+p:not(:last-child) {
+    margin-bottom: 1em;
+}
+
+.form-wrapper {
+    max-width: 600px;
+}
+
+.login-error-box {
+/*
+    font-weight: 700;
+    font-size: 1.5rem;
+*/
+    font-size: 2.5rem;
+    letter-spacing: 0.05rem;
+    background: rgba( 255,0,0, 0.8 );
+    color: #fff;
+    width: 268px; /* 256px logo + 2*6px virtual padding */
+    padding: 10px;
+}
+
+.login-logo {
+    height: 128px;
+    position: absolute;
+    top: calc( -128px - 2rem );
+    left: calc( 50% - 128px );
+}
+
+.login-error input {
+    background-color: #fcc;
+}
+
+.login-error-box-wrapper {
+    position: absolute;
+    height: 128px;
+    top: calc( -128px - 2rem );
+}

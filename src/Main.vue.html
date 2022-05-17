@@ -1,0 +1,20 @@
+  <div id="app">
+    <div id="div-top">
+<!--      <nprogress-container /> -->
+      <app-navbar />
+    </div>
+    <div id="div-middle">
+      <div id="div-middle-left">
+        <app-sidebar id="app-sidebar" :class="{ 'app-sidebar-hidden': !displaySidebar }" />
+      </div>
+        <div id="div-middle-right" class="vax-flex">
+          <app-main />
+        </div>
+    </div>
+    <!--
+    <div id="div-bottom">
+        <app-footer />
+    </div>
+    -->
+
+  </div>

@@ -1,0 +1,58 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass"
+  class="vax-width-limit-medium">
+
+<vax-box :bold="false">Login:</vax-box><vax-box>{{ jsonView.username }}</vax-box><br />
+<vax-box :bold="false">Email:</vax-box><vax-box>{{ jsonView.email }}</vax-box><br />
+<vax-box :bold="false">Imię i nazwisko:</vax-box><vax-box>{{ jsonView.name || '\u00A0' }}</vax-box><br />
+<vax-box :bold="false">Numer telefonu:</vax-box><vax-box>{{ jsonView.phone || '\u00A0' }}</vax-box><br />
+<vax-box :bold="false">Poziom uprawnień:</vax-box><vax-box>{{ permissionTypeToName( jsonView.userRole ) }}</vax-box>
+
+<vax-box size="large" class="vax-margin-top">
+<vax-form submit-caption="zmień hasło" submit-button-class="is-warning vax-bold"
+ name="changePassword" :action="postUrl" method="POST" @submit.prevent="submitPostAndReset">
+  <input type="hidden" name="id" :value="$route.query.id" />
+  <vax-input-field type="password" name="oldPassword"  caption="dotychczasowe hasło"
+   :required="$route.query.id === undefined" maxlength="50" />
+  <vax-input-field type="password" name="newPassword1" caption="nowe hasło" maxlength="50" />
+  <vax-input-field type="password" name="newPassword2" caption="powtórz nowe hasło" maxlength="50" />
+</vax-form>
+</vax-box>
+
+<vax-box size="large">
+<vax-form submit-caption="zmień email" submit-button-class="is-warning vax-bold"
+ name="changeEmail" :action="postUrl" method="POST" @submit.prevent="submitPostAndReset">
+  <input type="hidden" name="id" :value="$route.query.id" />
+  <vax-input-field type="email" name="email" caption="nowy email" maxlength="50" />
+</vax-form>
+</vax-box>
+
+<vax-box size="large">
+<vax-form submit-caption="zmień numer telefonu" submit-button-class="is-warning vax-bold"
+ name="changePhone" :action="postUrl" method="POST" @submit.prevent="submitPostAndReset">
+  <input type="hidden" name="id" :value="$route.query.id" />
+  <vax-input-field type="tel" name="phone" caption="nowy numer telefonu" pattern="[0-9 +]{9,16}"
+   placeholder="xxx xxx xxx" maxlength="20" />
+</vax-form>
+</vax-box>
+
+<vax-box v-if="$route.query.id !== undefined" size="medium">
+<vax-form submit-caption="ZABLOKUJ" submit-button-class="is-danger vax-bold vax-margin-all"
+ name="lockAccount" :action="postUrl" method="POST" @submit.prevent="submitPostAndLogoutIfSelf">
+  <input type="hidden" name="id" :value="$route.query.id" />
+  <b>Zablokuj konto</b>
+</vax-form>
+</vax-box>
+
+<vax-box v-if="jsonView.canRestrictToCurrentClazz" size="medium">
+<vax-form submit-caption="zmień" submit-button-class="is-warning vax-bold vax-margin-all vax-width-100pct-margined"
+ name="restrictToCurrentClazz" :action="postUrl" method="POST" @submit.prevent="submitPostAndLogoutIfSelf">
+  <input type="hidden" name="id" :value="$route.query.id" />
+  <b>
+    {{ jsonView.currentClazzId === null
+        ? 'Umożliw dostęp do wszystkich klas'
+        : 'Ogranicz dostęp do bieżącej klasy' }}
+  </b>
+</vax-form>
+</vax-box>
+
+</vax-view>

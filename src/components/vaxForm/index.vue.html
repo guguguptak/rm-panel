@@ -1,0 +1,16 @@
+<form class="vax-form" :class="{ 'vax-large-input': largeInputs }" :method="methodEx" :name="name"
+ :autocomplete="autocomplete" :target="actionCapture ? 'actionCaptureIframe' : undefined" v-on="$listeners"
+ @reset="notifyChildrenOfReset">
+ <vax-fieldset :disabled="disabled" :caption="caption" :invisible="caption === undefined"
+  :class="caption ? 'vax-legend-bar' : ''" caption-class="vax-uppercase" >
+  <input v-if="name" type="hidden" name="formName" :value="name" />
+  <iframe v-if="actionCapture" width="0" height="0" border="0" name="actionCaptureIframe"></iframe>
+  <slot>
+    <!-- PLACEHOLDER create content for slot -->
+  </slot>
+  <vax-button type="submit" :button-class="submitButtonClass" v-if="hasSubmit"
+   :class="submitButtonMargins ? 'vax-margin-top-wide vax-margin-bottom vax-margin-left vax-margin-right' : ''">
+    <span v-if="submitCaption">{{ submitCaption }}</span>
+  </vax-button>
+ </vax-fieldset>
+</form>

@@ -1,0 +1,46 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+<template v-if="!jsonView.contextMissing">
+
+<div class="vax-wrapper-scrollbar-x">
+<table class="vax-table vax-table-hover">
+  <thead>
+	<tr class="vax-table-row-underline">
+		<td >Klasa</td>
+		<td>Stan <br />dzienników</td>
+		<td >(x2) Liczba <br /> przejazdów</td>
+		<td >Liczba <br /> aktywnych</td>
+		<td>% frekwencji</td>
+	</tr>
+  </thead>
+  <tbody>
+	<tr class="vax-table-row-underline vax-bold">
+		<th>Suma</th>
+		<td>
+		  <vax-bool-icon :value="jsonView.clazzes.reduce( (b, clz) => b && clz.journalsOk, true )" />
+		</td>
+		<td class="vax-text-align-right">{{ jsonView.clazzes.reduce( (sum, clz) => sum + clz.cruiseCount, 0 ) * 2 }}</td>
+		<td class="vax-text-align-right">{{ jsonView.clazzes.reduce( (sum, clz) => sum + clz.activeCount, 0 ) }}</td>
+	    <td class="vax-text-align-right vax-cell-transparent">
+<!-- {{ (jsonView.clazzes.reduce( (sum, clz) => sum + clz.freqRatio, 0 ) / jsonView.clazzes.length).toFixed(2) }} -->
+        </td>
+	</tr>
+	<tr v-for="clazz in jsonView.clazzes">
+		<th><div class="vax-flex-center-vertical">
+          <div>{{ clazz.name }}</div>
+          <div v-if="clazz.trophy" class="vax-flex-grow vax-flex-end vax-margin-left">
+            <vax-trophy :type="clazz.trophy" class="vax-float-right" />
+          </div>
+		</div></th>
+		<td @click="submitPostDirect( { formName: 'changeClazzContext', id: clazz.id } );">
+		  <vax-bool-icon :value="clazz.journalsOk" />
+		</td>
+		<td class="vax-text-align-right">{{ clazz.cruiseCount * 2 }}</td>
+		<td class="vax-text-align-right">{{ clazz.activeCount }}</td>
+		<td class="vax-text-align-right">{{ toPercentString( clazz.freqRatio ) }}</td>
+	</tr>
+  </tbody>
+</table>
+</div>
+
+</template>
+</vax-view>

@@ -1,0 +1,43 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+
+<rm-form-city disabled has-caption :values="jsonView" />
+
+<vax-form v-if="jsonView && !jsonView.contextMissing" :disabled="jsonView.campaign.stage !== 0"
+ name="manageCity" :action="postUrl" method="POST" @submit.prevent="submitPost" caption="Dodatkowe ustawienia">
+
+  <vax-combo-slider
+    caption="Minimum przejazdów by móc otrzymać nagrodę indywidualną" input-name="minCruisesForPersonalReward"
+    slider-type="info" slider-size="large" :initial-value="jsonView.minCruisesForPersonalReward" :min="0" :max="30"
+    input-class="vax-numbers-2" :disabled="disabled"
+  />
+
+  <vax-combo-slider
+    caption="Próg graniczny 1 (poniżej: małe; równe i powyżej: średnie i duże)" input-name="threshold1"
+    :initial-value="jsonView.threshold1" slider-type="info" slider-size="large" v-model="thresh1" :max="4000"
+    input-class="vax-numbers-4"
+  />
+
+  <vax-combo-slider
+    caption="Próg graniczny 2 (poniżej: małe i średnie; równe i powyżej: duże)" input-name="threshold2"
+    :initial-value="jsonView.threshold2" slider-type="info" slider-size="large" v-model="thresh2" :max="4000"
+    input-class="vax-numbers-4"
+  />
+  
+  <p class="vax-margin-bottom"><b>Rezultat:</b></p>
+  <vax-box size="medium" :bold="false">
+  <span v-if="thresh1 <= thresh2">
+    SP mała: {{ thresh1 <= 1 ? 'brak kategorii' : '0 - ' + ( thresh1 - 1 ) }}<br />
+    SP średnia: {{ thresh2 == thresh1 ? 'brak kategorii' : thresh1 + ' - ' + ( thresh2 - 1 ) }}<br />
+    SP duża: {{ thresh2 == 4000 ? 'brak kategorii' : thresh2 + ' - max' }}<br />
+  </span>
+  <span v-else>
+    Błędne wartości progów (próg 1 > próg 2)<br />
+    <br />
+    <br />
+  </span>
+  </vax-box>
+  <br />
+  
+</vax-form>
+
+</vax-view>

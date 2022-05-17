@@ -1,0 +1,6 @@
+  <label>
+    <span v-if="slotBefore" :class="captionClass"><slot /></span>
+    <input type="checkbox" :class="inputClass" :name="name" :value="value" :checked="bChecked" v-on="$listeners"
+     v-bind="$attrs" />
+    <span v-if="!slotBefore" :class="captionClass"><slot /></span>
+  </label>

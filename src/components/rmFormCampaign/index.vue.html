@@ -1,0 +1,55 @@
+
+<vax-form :name="name" :action="action" method="POST" @submit.prevent="submitPost"
+ :disabled="disabled" :has-submit="!disabled" :caption="hasCaption ? 'Informacje o kampanii' : undefined">
+ 
+  <vax-input-field caption="Nazwa kampanii" name="campaignName"
+   placeholder="nazwa kampanii" :value="values.campaignName" maxlength="40" />
+
+  <div class="vax-flex-wrap field">
+    <vax-field caption="Dni trwania kampanii" class="vax-margin-right-wide">
+      <date-picker v-if="!disabled" :config="datePickerConfig1" value="" :required="true" name="campaignDatesStr"
+       class="input" placeholder="dd-mm-rrrr; dd-mm-rrrr" />
+      <div v-if="disabled" class="input vax-height-100pct">
+        {{ values.campaignDatesStr }}
+      </div>
+    </vax-field>
+
+    <vax-field caption="Data zakończenia kampanii">
+      <date-picker v-if="!disabled" :config="datePickerConfig2" value="" :required="true" name="campaignEndDateStr"
+       class="input" placeholder="data zakończenia" />
+      <div v-if="disabled" class="input vax-height-100pct">
+        {{ values.campaignEndDateStr }}
+      </div>
+    </vax-field>
+  </div>
+  
+  <vax-field caption="Uznawane formy dojazdów">
+    <rm-t12n-select type="checkbox" :options="values.t12nsPossible" :i-checked="values.t12ns"
+     caption-class="box vax-box-small vax-text-center" :disabled="disabled" />
+  </vax-field>
+  
+  <vax-checkbox-array caption="Kategorie zgłaszanych do udziału jednostek" name="unitTypes"
+   :options="values.unitTypesPossible" :captions="unitTypes" :i-checked="values.unitTypes" required />
+   
+  <vax-combo-slider
+    caption="Próg niezbędnego wypełnienia dziennika oddziału w placówkach (%)" input-name="journalThreshold"
+    slider-type="info" slider-size="large" :initial-value="values.journalThreshold" :min="0" :max="100"
+    input-class="vax-numbers-3" :disabled="disabled"
+  />
+
+  <vax-combo-slider
+    caption="Próg niezbędnego wypełnienia dzienników placówki w miastach (%)" input-name="unitJournalThreshold"
+    slider-type="info" slider-size="large" :initial-value="values.unitJournalThreshold" :min="0" :max="100"
+    input-class="vax-numbers-3" :disabled="disabled"
+  />
+
+  <vax-combo-slider
+    caption="Liczba dni wstecz do edycji dziennika dla nauczycieli" input-name="daysBackAllowed"
+    slider-type="info" slider-size="large" :initial-value="values.daysBackAllowed" :min="0" :max="10"
+     input-class="vax-numbers-2" :disabled="disabled"
+  />
+
+  <vax-checkbox-array caption="Potrzebne materiały drukowane" :captions="printMaterialTypes" 
+    name="printMaterialTypes" :options="values.printMaterialTypesPossible" :i-checked="values.printMaterialTypes" />
+   
+</vax-form>

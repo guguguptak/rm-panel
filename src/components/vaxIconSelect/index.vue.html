@@ -1,0 +1,11 @@
+  <div class="vax-horiz-label-group" ref="inputs">
+    <template v-for="n in options">
+      <label :class="captionClass">
+        <span :title="titles[n]" class="vax-block"
+         :class="['vax-icon','vax-icon-' + size, spanClass, iconPrefix + n]">{{ captions ? captions[n] : '' }}</span>
+        <input :type="type" :name="name + nameSuffix + '[]'" :value="n"
+         :checked="isChecked[n]" :disabled="disabled" v-on="$listeners"
+         @change="updateConstraint()" />
+      </label>
+    </template>
+  </div>

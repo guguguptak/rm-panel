@@ -1,0 +1,121 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+<template v-if="!jsonView.contextMissing">
+
+<vax-box size="medium" class="vax-margin-right-wide" :shadow="false">Dotychczas zaakceptowano:</vax-box>
+<vax-box size="medium">Przedszkola: {{ jsonView.acceptedTotal.units[0] }}</vax-box>
+<vax-box size="medium">SP: {{ jsonView.acceptedTotal.units[1] }}</vax-box>
+<vax-box size="medium">Dzieci: {{ jsonView.acceptedTotal.kids }}</vax-box>
+<vax-box size="medium">Dorosłych: {{ jsonView.acceptedTotal.adults }}</vax-box>
+<vax-box size="medium">Oddziałów: {{ jsonView.acceptedTotal.clazzes }}</vax-box>
+
+<div class="vax-wrapper-scrollbar-x">
+<table class="vax-table">
+
+<thead>
+    <tr>
+      <td class="vax-cell-hidden">&nbsp;</td>
+      <td class="vax-cell-hidden">&nbsp;</td>
+      <td class="vax-cell-join-right"><div class="vax-width-0">Zadeklarowano</div></td>
+      <td class="vax-cell-join">&nbsp;</td>
+      <td class="vax-cell-join-left">&nbsp;</td>
+      <td class="vax-cell-join-right"><div class="vax-width-0">Wprowadzono</div></td>
+      <td class="vax-cell-join">&nbsp;</td>
+      <td class="vax-cell-join-left">&nbsp;</td>
+      <td class="vax-cell-hidden">&nbsp;</td>
+      <td class="vax-cell-hidden">&nbsp;</td>
+      <td class="vax-cell-hidden">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="vax-text-align-left">Nazwa jednostki</td>
+      <td>Dzielnica</td>
+      <td>dorośli</td>
+      <td>dzieci</td>
+      <td>oddzi.</td>
+      <td>dorośli</td>
+      <td>dzieci</td>
+      <td>oddzi.</td>
+      <td>Akceptuj</td>
+      <td>Odrzuć</td>
+      <td>Usuń</td>
+    </tr>
+</thead>
+
+<tbody v-for="(unitType,i) in jsonView.units">
+<tr class="vax-table-row-lines vax-bold">
+  <td>{{ unitTypesPlural[i] }}</td>
+  <td class="vax-cell-transparent">&nbsp;</td>
+  <td class="vax-text-align-right">{{ unitType.reduce( (sum, unit) => sum + unit.declaredAdults, 0 ) }}</td>
+  <td class="vax-text-align-right">{{ unitType.reduce( (sum, unit) => sum + unit.declaredKids, 0 ) }}</td>
+  <td class="vax-text-align-right">{{ unitType.reduce( (sum, unit) => sum + unit.declaredClazzes, 0 ) }}</td>
+  <td class="vax-text-align-right">{{ unitType.reduce( (sum, unit) => sum + unit.countAdults, 0 ) }}</td>
+  <td class="vax-text-align-right">{{ unitType.reduce( (sum, unit) => sum + unit.countKids, 0 ) }}</td>
+  <td class="vax-text-align-right">{{ unitType.reduce( (sum, unit) => sum + unit.countClazzes, 0 ) }}</td>
+  <td class="vax-cell-transparent">&nbsp;</td>
+  <td class="vax-cell-transparent">&nbsp;</td>
+  <td class="vax-cell-transparent">&nbsp;</td>
+</tr>
+<tr v-for="(unit,j) in unitType">
+  <td class="vax-text-align-left" @click="manageUnit( unit.id )">
+    <a><i class="fa fa-file-o"></i> {{ unit.unitName }}</a>
+  </td>
+  <td>
+    {{ unit.unitDistrict }}
+  </td>
+  <td class="vax-text-align-right">
+    {{ unit.declaredAdults }}
+  </td>
+  <td class="vax-text-align-right">
+    {{ unit.declaredKids }}
+  </td>
+  <td class="vax-text-align-right">
+    {{ unit.declaredClazzes }}
+  </td>
+  <td class="vax-text-align-right" :class="{ 'vax-is-warning' : unit.countAdults !== unit.declaredAdults }">
+    {{ unit.countAdults }}
+  </td>
+  <td class="vax-text-align-right" :class="{ 'vax-is-error' : unit.countKids !== unit.declaredKids }">
+    {{ unit.countKids }}
+  </td>
+  <td class="vax-text-align-right" :class="{ 'vax-is-error' : unit.countClazzes !== unit.declaredClazzes }">
+    {{ unit.countClazzes }}
+  </td>
+  <template v-if="unit.verdictPending">
+    <td>
+      <button class="button vax-button-small is-success"
+        @click="submitPostDirect( { formName: 'requests', id: unit.id, verdict: 1 } )">
+        <i class="fa fa-check"></i>
+      </button>
+    </td>
+    <td>
+      <button class="button vax-button-small is-danger"
+        @click="submitPostDirect( { formName: 'requests', id: unit.id, verdict: 0 } )">
+        <i class="fa fa-times"></i>
+      </button>
+    </td>
+  </template>
+  <template v-else>
+    <td>
+      <button v-if="unit.isAccepted" class="button vax-button-small">
+        <i class="fa fa-check"></i>
+      </button>
+    </td>
+    <td>
+      <button v-if="!unit.isAccepted" class="button vax-button-small">
+        <i class="fa fa-times"></i>
+      </button>
+    </td>
+  </template>
+  <td>
+    <button v-if="unit.isRemovable" class="button vax-button-small is-warning"
+      @click="submitPostDirectUpdateContext( { formName: 'removeUnit', id: unit.id } )">
+      <i class="fa fa-trash-o"></i>
+    </button>
+  </td>
+</tr>
+</tbody>
+
+</table>
+</div>
+
+</template>
+</vax-view>

@@ -1,0 +1,9 @@
+  <fieldset :class="['vax-fieldset', invisible ? 'vax-fieldset-invis' : '',
+   collapsed ? 'vax-fieldset-collapsed' : ( collapsable ? 'vax-fieldset-collapsable' : '')]">
+    <legend v-if="caption !== undefined" class="vax-legend" :class="captionClass" @click="toggle">{{ caption }}</legend>
+    <div class="vax-fieldset-content">
+      <slot>
+        <!-- PLACEHOLDER create content for this slot -->
+      </slot>
+    </div>
+  </fieldset>

@@ -1,0 +1,7 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass"
+ class="vax-width-limit-medium">
+
+  <b v-if="jsonView.campaignStageInvalid">Kampania została już rozpoczęta; brak możliwości zgłaszania placówek.</b>
+  <rm-form-unit v-else @submit.prevent="submitPostUpdateContext" :action="postUrl" :values="jsonView" />
+  
+</vax-view>

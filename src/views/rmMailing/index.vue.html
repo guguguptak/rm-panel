@@ -1,0 +1,36 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass"
+ class="vax-padding-left">
+
+  <vax-form name="mailTo" :action="postUrl" method="POST" @submit.prevent="mailTo">
+
+    <vax-input-field caption="Temat wiadomości" name="mailSubject" value="Rowerowy Maj - komunikat" />
+
+    <vax-field caption="Treść wiadomości">
+<textarea name="mailContent" class="textarea vax-textarea">
+Uwaga: informujemy, że ...
+</textarea>
+    </vax-field>
+
+    <vax-file-select v-if="jsonView.canAttach" :file-list="fileList"
+     caption="Załączniki" go-to-caption="Dodaj inne załączniki..." go-to-path="/files" />
+
+<b>Adresaci (wysyłka ograniczona do bieżącego kontekstu):</b>
+
+<div class="vax-margin-top">
+  <vax-mailing-box name-prefix="cityCoords" :mailing-group="jsonView.cityCoords"
+   user-role="Koordynator Miejski" />
+  <vax-mailing-box name-prefix="unitCoords" :mailing-group="jsonView.unitCoords"
+   user-role="Koordynator Szkolny" />
+  <vax-mailing-box name-prefix="journalKeepers" :mailing-group="jsonView.journalKeepers"
+   user-role="nauczyciel" />
+</div>
+
+<!--  
+<div class="vax-bold">
+  Sposób wysyłki:
+  <vax-combobox class="vax-margin-top" :captions="mailerTypes" />
+</div>
+-->
+</vax-form>
+
+</vax-view>

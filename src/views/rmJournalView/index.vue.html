@@ -1,0 +1,101 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+<template v-if="!jsonView.contextMissing">
+
+<div class="vax-dont-print vax-margin-bottom">
+<template v-if="jsonView.reward">
+  <vax-box size="medium" class="hero is-success">Wygrana nagroda grupowa: &nbsp; {{ jsonView.reward.name }}</vax-box>
+  <vax-box size="medium" class="hero is-info vax-margin-right-wide">
+    Ważna od: &nbsp; {{ jsonView.reward.validFrom }} &nbsp; do: &nbsp; {{ jsonView.reward.validTo }}
+  </vax-box>
+</template>
+
+<vax-box size="medium">Liczba osób: {{ jsonView.participants.length }}</vax-box>
+</div>
+<div class="vax-flex vax-print-tight-tables vax-print-small-font vax-wrapper-scrollbar-x">
+
+<table id="rm-journal-view-names" class="vax-table vax-margin-right vax-inline-table">
+  <thead>
+    <tr class="vax-table-row-underline">
+      <th class="vax-cell-hidden">&nbsp;</th>
+      <th>Imię i nazwisko</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(pcp,i) in jsonView.participants">
+      <th class="vax-text-align-right">{{ i + 1 }}</th>
+      <th>
+      <div class="vax-icon-small-height vax-flex-center-vertical">
+        {{ pcp.name }}
+      </div>
+      </th>
+    </tr>
+  </tbody>
+</table>
+
+<div id="cruises" class="vax-wrapper-scrollbar-x vax-inline-block">
+<table class="vax-table vax-inline-table vax-table-hover">
+  <thead>
+    <tr class="vax-table-row-underline">
+      <td v-for="(date,i) in jsonView.dates" :class="'rm-journal-' + date.timeline + '-day'"
+       @click="journalEdit( date.editable, i )">
+        {{ date.label }}
+      </td>
+      <td class="vax-print-only">Nagroda</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="pcp in jsonView.participants">
+      <td v-for="(t12n,i) in pcp.cruises" :class="'rm-journal-' + jsonView.dates[i].timeline + '-day'">
+        <div class="vax-icon-small rm-icon rm-icon-color">
+          <span :class="( t12n === 0 ) ? 'vax-red' : ''">
+            {{ ( t12n !== null ) ? String.fromCharCode( 0xE000 + t12n ) : '\xA0' }}
+          </span>
+        </div>
+      </td>
+      <td class="vax-print-only">
+        <div class="vax-icon-small-height vax-flex-center">
+          {{ pcp.reward }}
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<table id="rm-journal-view-total" class="vax-table vax-margin-left vax-inline-table vax-dont-print">
+  <thead>
+    <tr class="vax-table-row-underline"><td>Suma</td></tr>
+  </thead>
+  <tbody>
+    <tr v-for="pcp in jsonView.participants">
+      <td>
+        <div class="vax-icon-small-height vax-flex-center">
+          {{ pcp.cruises.reduce((a,b) => a + ( b > 0 ? 1 : 0 ), 0) }}
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table id="rm-journal-view-total" class="vax-table vax-margin-left vax-inline-table vax-dont-print">
+  <thead>
+    <tr class="vax-table-row-underline"><td>Nagroda</td></tr>
+  </thead>
+  <tbody>
+    <tr v-for="pcp in jsonView.participants">
+      <td>
+        <div class="vax-icon-small-height vax-flex-center">
+          {{ pcp.reward }}
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+<!--
+<vax-button>generuj pusty arkusz CSV</vax-button>
+-->
+</template>
+</vax-view>

@@ -1,0 +1,27 @@
+.vax-fieldset-collapsable {
+  .vax-legend:after {
+    content: " ▲";
+    color: black;
+    margin-left: 0.5rem;
+  }
+}
+
+.vax-fieldset-collapsed {
+  /*
+  border-left: none;
+  border-right: none;
+  */
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 1rem;
+  
+  .vax-legend:after {
+    content: " ▼";
+    color: turquoise;
+    margin-left: 0.5rem;
+  }
+  
+  .vax-fieldset-content {
+    display: none;
+  }
+}

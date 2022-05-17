@@ -1,0 +1,154 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+
+<vax-box size="medium">Minimalna liczba przejazdów by otrzymać nagrodę: {{ jsonView.minCruises }}</vax-box>
+
+<div class="vax-flex vax-margin-bottom-wide">
+
+<div class="vax-wrapper-scrollbar-x vax-inline-block">
+<table class="vax-table vax-inline-table vax-table-hover">
+<thead>
+<tr>
+  <td class="vax-cell-hidden">&nbsp;</td>
+  <td class="vax-cell-hidden">&nbsp;</td>
+  <td class="vax-cell-hidden">&nbsp;</td>
+  <td class="vax-cell-join-right"><div class="vax-width-0">Wiek</div></td>
+  <td class="vax-cell-join-left"></td>
+  <td class="vax-cell-join-right"><div class="vax-width-0">Brakujących<br/>przejazdów</div></td>
+  <td class="vax-cell-join-left"></td>
+
+  <template v-if="ageOptionsPresent.length === 1">
+  <td>Przyznano</td>
+  </template>
+  <template v-else-if="ageOptionsPresent.length > 1">
+  <td class="vax-cell-join-right"><div class="vax-width-0">Przyznano</div></td>
+  <td class="vax-cell-join" v-for="i in ageOptionsPresent.length - 2"></td>
+  <td class="vax-cell-join-left"></td>
+  </template>
+
+  <td class="vax-cell-join-right"><div class="vax-width-0">Liczba</div></td>
+  <td class="vax-cell-join-left"></td>
+  <td class="vax-cell-hidden">&nbsp;</td>
+</tr>
+<tr class="vax-table-row-underline">
+  <td class="vax-cell-hidden">&nbsp;</td>
+  <td>Nazwa</td>
+  <td>Priotytet</td>
+  <td>min</td>
+  <td>max</td>
+  <td>min</td>
+  <td>max</td>
+  <td class="vax-wrap" v-for="ageOption in ageOptionsPresent">{{ ageOptionNames[ageOption+1] }}</td>
+  <td>razem</td>
+  <td>zostało</td>
+  <td>Usuń</td>
+</tr>
+</thead>
+<tbody>
+
+<tr v-for="(reward,i) in jsonView.rewards">
+  <td class="vax-text-align-right">{{ i + 1 }}</td>
+  <td>{{ reward.rewardName }}</td>
+  <td class="-vax-text-align-right">{{ reward.priority }}</td>
+  <td>{{ getAgeOptionName( reward.ageCategoryMin ) }}</td>
+  <td>{{ getAgeOptionName( reward.ageCategoryMax ) }}</td>
+  <td class="vax-text-align-right">{{ reward.cruisesMissedMin }}</td>
+  <td class="vax-text-align-right">{{ reward.cruisesMissedMax }}</td>
+  <td class="vax-text-align-right" v-for="ageOption in ageOptionsPresent">{{ reward.countByAge[ageOption] }}</td>
+  <td class="vax-text-align-right">
+    <div v-if="reward.canEdit" class="vax-flex">
+      <input type="hidden" :value="reward.id"></input>
+      <vax-input-field v-model="reward.totalCount" type="number" name="name"
+       class="vax-margin-bottom-none vax-numbers-3" />
+      <vax-button button-class="is-warning vax-button-small"
+       @click="editPersonalReward">
+        <i class="fa fa-edit"></i>
+      </vax-button>
+    </div>
+    <span v-else>{{ reward.totalCount }}</span>
+  </td>
+  <td class="vax-text-align-right">{{ reward.remainingCount }}</td>
+      <td>
+        <button v-if="reward.canEdit" class="button vax-button-small is-danger"
+          @click="submitPostDirect( { formName: 'removePersonalReward', id: reward.id } )">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+</div>
+
+<vax-form name="addPersonalReward" :action="postUrl" method="POST" @submit.prevent="submitPostAndReset"
+ submit-caption="Dodaj nagrodę" class="vax-margin-bottom">
+
+<div class="vax-wrapper-scrollbar-x vax-inline-block vax-margin-bottom">
+<table class="vax-table vax-inline-table vax-table-hover">
+<thead>
+<tr>
+  <td class="vax-cell-hidden">&nbsp;</td>
+  <td class="vax-cell-hidden">&nbsp;</td>
+  <td class="vax-cell-join-right"><div class="vax-width-0">Wiek</div></td>
+  <td class="vax-cell-join-left"></td>
+</tr>
+<tr class="vax-table-row-underline">
+  <td>Nazwa</td>
+  <td>Priotytet</td>
+  <td>min</td>
+  <td>max</td>
+  <td>Sztuk razem</td>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+  <td><input name="rewardName" class="input vax-small-icon-height" required maxlength="50" /></td>
+  <td><input name="priority" type="number"
+   class="input vax-small-icon-height vax-numbers-2 vax-text-align-right" required /></td>
+  <td><rm-age-category-select name="ageCategoryMin" /></td>
+  <td><rm-age-category-select name="ageCategoryMax" /></td>
+  <td><input name="totalCount" type="number" class="input vax-small-icon-height" required /></td>
+</tr>
+</tbody>
+
+</table>
+</div>
+
+</vax-form>
+
+<table class="vax-table vax-inline-table vax-table-hover">
+  <thead>
+    <tr>
+      <td>Wiek</td>
+      <td>Bez<br/> nagrody</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(ageOptionName,i) in ageOptionNames" v-if="i !== 0 && i !== 4">
+      <td>{{ ageOptionName }}</td>
+      <td class="vax-text-align-right">{{ jsonView.participantsByAgeRewardless[i-1] }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<vax-button v-if="jsonView.canAssignPersonalRewards"
+  button-class="vax-width-100pct is-primary vax-margin-top vax-margin-bottom"
+  @click="submitPostDirect( { formName: 'assignAllPersonalRewards' } )" >
+  Rozdziel nagrody automatycznie
+</vax-button>
+
+<vax-button v-if="jsonView.canResetPersonalRewardsAssignment"
+  button-class="vax-width-100pct is-warning vax-margin-top vax-margin-bottom"
+  @click="submitPostDirect( { formName: 'resetPersonalRewardsAssignment' } )" >
+  Resetuj przydział nagród
+</vax-button>
+
+<vax-button v-if="!jsonView.personalRewardsConfirmed"
+  button-class="vax-width-100pct is-warning vax-margin-top vax-margin-bottom"
+  @click="submitPostDirect( { formName: 'confirmPersonalRewardsAssignment' } )" >
+  Zatwierdź przydział nagród
+</vax-button>
+
+</vax-view>

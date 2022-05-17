@@ -1,0 +1,10 @@
+.vax-collapse {
+    display: inline-flex;
+    background: none;
+/*    border: none; */
+}
+
+.vax-button {
+    width: 2.5rem;
+    height: 2.5rem;
+}

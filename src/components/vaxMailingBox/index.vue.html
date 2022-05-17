@@ -1,0 +1,27 @@
+<div v-if="mailingGroup === null">
+ <vax-box class="vax-margin-bottom" size="medium" :bold="false" rounded>
+  <input :name="namePrefix + '_all'" value="1" type="checkbox" class="vax-margin-right-medium" />
+  każdy <b>{{ userRole }}</b>
+ </vax-box>
+</div>
+<div v-else-if="mailingGroup !== undefined">
+ <vax-box size="medium">{{ userRole }}</vax-box>
+ <table class="vax-table">
+  <thead>
+    <tr class="vax-table-row-underline">
+      <td><input type="checkbox" @click="toggleTableCheckboxes"/></td>
+      <td class="vax-bold">Imię i nazwisko</td>
+      <td class="vax-bold">Email</td>
+      <td class="vax-bold">Zarządza</td>
+    </tr>
+  </thead>
+  <tbody ref="toggleGroup">
+    <tr v-for="(user,i) in mailingGroup">
+      <td><input type="checkbox" :name="namePrefix + '[]'" :value="user.id" /></td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ userManages(user) }}</td>
+    </tr>
+  </tbody>
+ </table>
+</div>

@@ -1,0 +1,133 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+<template v-if="!jsonView.contextMissing">
+
+<div class="vax-wrapper-scrollbar-x vax-margin-bottom-wide">
+<table class="vax-table vax-table-hover">
+  <thead>
+	<tr>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<template v-if="jsonView.possibleGroupRewards.length === 1">
+		<td>Nagrody grupowe</td>
+		</template>
+		<template v-else-if="jsonView.possibleGroupRewards.length > 1">
+		<td class="vax-cell-join-right"><div class="vax-width-0">Nagrody grupowe</div></td>
+		<td class="vax-cell-join" v-for="reward in jsonView.possibleGroupRewards.length - 2"></td>
+		<td class="vax-cell-join-left"></td>
+		</template>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td class="vax-cell-hidden">&nbsp;</td>
+	</tr>
+	<tr class="vax-table-row-underline">
+		<td>Jednostka</td>
+		<td>Dzielnica</td>
+		<td>Adres</td>
+		<td class="vax-wrap" v-for="item in jsonView.possibleGroupRewards">{{ item.name }}</td>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td>Potwierdzenie<br />odbioru</td>
+	</tr>
+  </thead>
+	
+  <tbody v-for="(unitType,i) in jsonView.units">
+	<tr class="vax-table-row-lines vax-bold">
+		<td>{{ unitTypesPlural[i] }}</th>
+		<td class="vax-cell-transparent">&nbsp;</td>
+		<td class="vax-cell-transparent">&nbsp;</td>
+		<td v-for="(n,i) in jsonView.possibleGroupRewards" class="vax-text-align-right">
+		  {{ unitType.reduce( (sum, unit) => sum + unit.groupRewardCount[i], 0 ) }}
+		</td>
+		<td class="vax-cell-hidden"></td>
+		<td>&nbsp;</td>
+	</tr>
+	<template v-for="(unit,i) in unitType">	
+	<tr>
+		<th>
+		  <div class="vax-flex-center-vertical">
+		    <div>{{ unit.name }}</div>
+		    <div v-if="unit.trophy" class="vax-flex-grow vax-flex-end vax-margin-left">
+		      <vax-trophy :type="unit.trophy" class="vax-float-right" />
+		    </div>
+		  </div>
+		</th>
+		<td>{{ unit.district }}</td>
+		<td>{{ unit.address }}</td>
+		<td v-for="cnt in unit.groupRewardCount" class="vax-text-align-right">{{ cnt }}</td>
+    	<td class="vax-cell-hidden"></td>
+		<td>&nbsp;</td>
+	</tr>
+	</template>
+  </tbody>
+</table>
+</div>
+
+<div class="vax-wrapper-scrollbar-x vax-margin-bottom-wide">
+<table class="vax-table vax-table-hover">
+  <thead>
+	<tr>
+		<td>Jednostka</td>
+		<td>Oddział</td>
+		<td>Nagroda grupowa</td>
+		<td>Sztuk</td>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td>Potwierdzenie<br />odbioru</td>
+	</tr>
+  </thead>
+	
+  <tbody v-for="(unitType,i) in jsonView.units">
+	<tr class="vax-table-row-lines">
+	  <td><b>{{ unitTypesPlural[i] }}</b></td>
+      <td class="vax-cell-transparent">&nbsp;</td>
+      <td class="vax-cell-transparent">&nbsp;</td>
+      <td class="vax-cell-transparent">&nbsp;</td>
+      <td class="vax-cell-hidden"></td>
+      <td class="vax-cell-transparent">&nbsp;</td>
+	</tr>
+	<template v-for="(unit,i) in unitType">
+    <tr v-for="(clazz,j) in unit.clazzes">
+		<th :class="{ 'vax-cell-transparent': ( j !== 0 ) }">
+		  <div v-if="j === 0" class="vax-flex-center-vertical">
+		    <div>{{ unit.name }}</div>
+		    <div v-if="unit.trophy" class="vax-flex-grow vax-flex-end vax-margin-left">
+		      <vax-trophy :type="unit.trophy" class="vax-float-right" />
+		    </div>
+		  </div>
+		  <div v-else>&nbsp;</div>
+		</th>
+		<td>{{ clazz.name }}</td>
+		<td>{{ clazz.groupRewardName }}</td>
+		<td class="vax-text-align-right">{{ clazz.groupRewardCount }}</td>
+    	<td class="vax-cell-hidden"></td>
+		<td>&nbsp;</td>
+	</tr>
+	</template>
+  </tbody>
+</table>
+</div>
+
+<div class="vax-wrapper-scrollbar-x">
+<table class="vax-table vax-table-hover">
+  <thead>
+    <tr>
+      <td class="vax-cell-hidden"></td>
+      <td class="vax-cell-join-right"><div class="vax-width-0">Ważność</div></td>
+      <td class="vax-cell-join-left"></td>
+    </tr>
+    <tr class="vax-table-row-underline">
+      <td>Nazwa</td>
+      <td>od</td>
+      <td>do</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="item in jsonView.possibleGroupRewards">
+      <td>{{ item.name }}</td>
+      <td>{{ item.validFrom }}</td>
+      <td>{{ item.validTo }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</template>
+</vax-view>

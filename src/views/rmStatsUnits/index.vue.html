@@ -1,0 +1,58 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+<template v-if="!jsonView.contextMissing">
+
+<div class="vax-wrapper-scrollbar-x">
+
+<table class="vax-table vax-table-hover">
+  <thead>
+	<tr>
+		<td>Nazwa jednostki</td>
+		<td>Stan<br />dzienników</td>
+		<td>Najlepsza<br /> klasa</td>
+		<td>% frekw.<br />klasy</td>
+		<td>(x2) Liczba<br />przejazdów</td>
+		<td>Aktywnych<br />uczestników</td>
+		<td>% frekw.<br />jednostki</td>
+	</tr>
+  </thead>
+
+  <tbody v-for="(unitType, i) in jsonView.units">
+  	<tr class="vax-table-row-lines vax-bold">
+		<td>{{ unitTypesPlural[i] }}</td>
+		<td>
+		  <vax-bool-icon :value="unitType.reduce( (b, sch) => b && sch.journalsOk, true )" />
+		</td>
+		<td class="vax-cell-transparent">&nbsp;</td>
+		<td class="vax-text-align-right vax-cell-transparent">
+          <!-- {{ (unitType.reduce( (sum, sch) => sum + sch.freqRatioBestClazz, 0 ) / unitType.length ).toFixed(2) }} -->
+		</td>
+		<td class="vax-text-align-right">
+		  {{ unitType.reduce( (sum, sch) => sum + sch.cruiseCount, 0 ) * 2 }}
+		</td>
+		<td class="vax-text-align-right">
+		  {{ unitType.reduce( (sum, sch) => sum + sch.activeCount, 0 ) }}
+		</td>
+		<td class="vax-text-align-right vax-cell-transparent">
+		  <!-- {{ (unitType.reduce( (sum, sch) => sum + sch.freqRatio, 0 ) / unitType.length ).toFixed(2) }} -->
+		</td>
+	</tr>
+	<tr v-for="unit in unitType">
+		<th><div class="vax-flex-center-vertical">
+          <div>{{ unit.name }}</div>
+          <div v-if="unit.trophy" class="vax-flex-grow vax-flex-end vax-margin-left">
+            <vax-trophy :type="unit.trophy" class="vax-float-right" />
+          </div>
+		</div></th>
+		<td><vax-bool-icon :value="unit.journalsOk" /></td>
+		<td>{{ unit.bestClazz }}</td>
+		<td class="vax-text-align-right">{{ toPercentString( unit.freqRatioBestClazz || 0 ) }}</td>
+		<td class="vax-text-align-right">{{ unit.cruiseCount * 2 }}</td>
+		<td class="vax-text-align-right">{{ unit.activeCount }}</td>
+		<td class="vax-text-align-right">{{ toPercentString( unit.freqRatio ) }}</td>
+	</tr>
+  </tbody>
+</table>
+</div>
+
+</template>
+</vax-view>

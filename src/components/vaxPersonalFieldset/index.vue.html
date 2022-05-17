@@ -1,0 +1,14 @@
+ <vax-fieldset :caption="caption" :collapsable="collapsable" :initial-collapsed="initialCollapsed">
+  <vax-input-field caption="Imię i nazwisko" :name="name + '_name'"
+   placeholder="imię i nazwisko" :required="!collapsable && required" :value="valuesComp.name"
+   :disabled="disabled" maxlength="50" />
+
+  <vax-input-field caption="Nr telefonu" :name="name + '_phone'" type="tel" pattern="[0-9 +]{9,16}"
+   placeholder="xxx xxx xxx" :required="!collapsable && required" :value="valuesComp.phone"
+   :disabled="disabled" maxlength="20" />
+
+  <vax-input-field caption="Adres email" :name="name + '_email'" type="email"
+   placeholder="abc@xyz.com" :required="!collapsable && required" :value="valuesComp.email"
+   :disabled="disabled" maxlength="50" />
+
+ </vax-fieldset>

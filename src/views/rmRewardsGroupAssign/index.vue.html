@@ -1,0 +1,55 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+
+<div class="vax-flex vax-margin-bottom">
+
+<div class="vax-wrapper-scrollbar-x vax-inline-block">
+<table class="vax-table vax-inline-table vax-table-hover">
+  <thead>
+    <tr class="vax-table-row-underline">
+      <td>Placówka</td>
+      <td>Oddział</td>
+      <td>Frekwencja %</td>
+      <td>Potrzebna<br />ilość</td>
+      <td>Nagroda<br />preferowana</td>
+      <td>Nagroda<br />niepożądana</td>
+      <td>Wybrana nagroda</td>
+      <td>Zatwierdź</td>
+    </tr>
+  </thead>
+  <tbody>
+  <template v-for="(unit,i) in jsonView.rewardsGroupAssign">
+    <tr :data-it="i" v-for="(clazz,j) in unit.clazzes" :class="{ 'vax-table-row-overline': ( j === 0 ) } ">
+      <td class="vax-icon-small-height vax-bold" :class="{ 'vax-cell-transparent': ( j !== 0 ) } ">
+        {{ j === 0 ? unit.name : '\xA0' }}
+      </td>
+      <td>{{ clazz.name }}</td>
+      <td class="vax-text-align-right">{{ toPercentString( clazz.freqRatio ) }}</td>
+      <td class="vax-text-align-right">{{ clazz.amountRequired }}</td>
+      <td :class="{ 'vax-is-error': clazz.preferredRewardImpossible }">{{ clazz.preferredGroupReward }}</td>
+      <td>{{ clazz.unwantedGroupReward }}</td>
+      <td>
+        <vax-combobox class="vax-float-right"
+         :captions="clazz.possibleRewardsNames" :values="clazz.possibleRewardsIds" :selected-value="clazz.suggestedReward" />
+      </td>
+      <td>
+        <vax-button v-if="clazz.canAssignReward"
+         button-class="is-warning vax-button-small" class="vax-flex-center" @click="assignReward">
+          <input type="hidden" name="clazzId" :value="clazz.id" />
+          <i class="fa fa-trophy"></i>
+        </vax-button>
+      </td>
+    </tr>
+  </template>
+  </tbody>
+</table>
+
+</div>
+
+</div>
+
+<vax-button v-if="jsonView.canAssignAllRewards" @click="submitPostDirect( { formName: 'assignAllGroupRewards' } )"
+  button-class="vax-width-100pct is-primary vax-margin-top vax-margin-bottom" >
+  Rozdziel pozostałe nagrody automatycznie
+</vax-button>
+
+</vax-view>

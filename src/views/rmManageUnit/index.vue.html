@@ -1,0 +1,24 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+  <rm-form-unit v-if="jsonView && !jsonView.contextMissing"
+   :disabled="jsonView.campaign.stage !== 0" restricted has-caption :values="jsonView"
+   @submit.prevent="submitPostUpdateContext" :action="postUrl" name="manageUnit" />
+ 
+<!--
+<vax-form v-if="jsonView && !jsonView.contextMissing" 
+ name="manageUnit" :action="postUrl" method="POST" @submit.prevent="submitPost" caption="Zmiana ustawień">
+
+ <vax-fieldset caption="Uczestnicy kampanii">
+  <vax-input-field caption="Całkowita liczba klas/grup" control-class="vax-numbers-4"
+    type="number" name="declaredClazzes" :value="jsonView.declaredClazzes" />
+
+  <vax-input-field caption="Liczba uczniów/dzieci" control-class="vax-numbers-4"
+   type="number" name="declaredKids" :value="jsonView.declaredKids" />
+
+  <vax-input-field caption="Liczba pracowników" control-class="vax-numbers-4"
+   type="number" name="declaredAdults" :value="jsonView.declaredAdults" />
+ </vax-fieldset>
+
+</vax-form>
+-->
+  
+</vax-view>

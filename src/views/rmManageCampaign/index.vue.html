@@ -1,0 +1,35 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+
+  <rm-form-campaign disabled has-caption :values="jsonView" />
+
+  <fieldset style="margin-top: 1rem; border-bottom: none; border-left: none; border-right:none; padding: 0.5rem 1rem 0.5rem; border-color: rgba(255,255,255,0.5);">
+    <legend class="vax-legend vax-uppercase">Ustawienia kampanii</legend>
+  </fieldset>
+  
+  <vax-box>
+    Etap kampanii: {{ campaignStage }}
+  </vax-box>
+
+  <vax-button button-class="is-warning vax-bold" v-if="jsonView.stage < 2"
+   @click="submitPostDirectAndScroll( { formName: 'progressThroughCampaign' } )">
+    Przejdź do następnego etapu kampanii
+  </vax-button>
+
+  <vax-button button-class="is-danger" v-if="jsonView.stage === 2"
+   @click="confirmProcessFinishedCampaign">
+    Transformuj zakończoną kampanię na agregat
+  </vax-button>
+  
+  <vax-form v-if="jsonView.canRemove" submit-caption="Usuń kampanię"
+   submit-button-class="is-danger vax-bold vax-margin-all"
+   name="removeCampaign" :action="postUrl" method="POST" @submit.prevent="submitPost">
+    <b>Usuń</b>
+  </vax-form>
+
+  <hr />
+
+  <vax-button button-class="is-warning vax-bold"
+   @click="submitPostDirectAndScroll( { formName: 'aggregateAsDefaultForPublicApi' } )">
+    Agreguj jako domyślne źródło danych ("Rowerowy Maj") publicznego API
+  </vax-button>
+</vax-view>

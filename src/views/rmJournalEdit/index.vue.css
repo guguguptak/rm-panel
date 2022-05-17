@@ -1,0 +1,13 @@
+
+.vax-table-ordinal {
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+
+.pcp-name {
+  @media (max-width: 600px) {
+    padding: 0 0.5rem 0 0.25rem;
+  }
+}
+

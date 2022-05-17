@@ -1,0 +1,51 @@
+  <div class="is-bold app-navbar animated" :class="{ slideInDown: show, slideOutDown: !show }">
+    <div class="">
+      <nav class="nav vax-flex-center">
+        <div class="nav-left vax-flex-center vax-dont-print">
+          <vax-link-icon title="Rozwiń/zwiń menu boczne" img="bars" @click="toggleSidebar" />
+          <div class="vax-flex-grow"></div>
+        </div>
+        <div class="nav-center vax-text-center vax-flex-center">
+         <vax-form :has-submit="false" method="POST" :action="postUrl" name="changeContext">
+          <div class="nc-wrapper">
+            <vax-combobox
+             name="campaign" :captions="gctxs('campaign','names')" 
+             :values="gctxs('campaign','ids')" :selected-value="gctx('campaign','ids')" @change="submitPost">
+              <img v-if="campaignStage !== undefined" class="campaign-stage-img"
+               :src="'/img/stages/' + campaignStage + '.svg'"
+               :title="'etap ' + campaignStage" :alt="'etap ' + campaignStage" />
+              Kampania
+            </vax-combobox>
+            <vax-combobox
+             name="city" :captions="gctxs('city','names')"
+             :values="gctxs('city','ids')" :selected-value="gctx('city','ids')" @change="submitPost">
+              Miasto
+            </vax-combobox>
+          </div>
+          <div class="nc-wrapper">
+            <vax-combobox
+             name="unit" :captions="gctxs('unit','names')"
+             :values="gctxs('unit','ids')" :selected-value="gctx('unit','ids')" @change="submitPost">
+              Placówka
+            </vax-combobox>
+            <vax-combobox
+             name="clazz" :captions="gctxs('clazz','names')"
+             :values="gctxs('clazz','ids')" :selected-value="gctx('clazz','ids')" @change="submitPost">
+              Klasa
+            </vax-combobox>
+          </div>
+         </vax-form>
+        </div>
+        <div class="nav-right vax-flex vax-dont-print">
+         <div class="nc-wrapper">    
+          <vax-link-icon title="Pomoc" img="question" :href="'/docs/RM_Panel' + accessLevel + '.pdf'" target="_blank" />
+          <vax-link-icon title="Drukuj..." img="print" onClick="window.print();" />
+         </div>
+         <div class="nc-wrapper">
+          <vax-link-icon title="Ustawienia konta" img="cog" @click="goTo('/accountSettings')" />
+          <vax-link-icon title="Wyloguj" img="power-off" href="/logout" />
+         </div>
+        </div>
+      </nav>
+    </div>
+  </div>

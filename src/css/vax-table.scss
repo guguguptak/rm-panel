@@ -1,0 +1,154 @@
+
+/* this is a workaround for possible bug in FF appearing in this specific case */
+@-moz-document url-prefix() {
+    .vax-wrapper-scrollbar-x {
+        padding-left: 1px;
+    }
+}
+
+.vax-wrapper-scrollbar-x .vax-table {
+    margin-bottom: 0;
+    max-width: calc( 100% - 1px ); /* workaround for the additional padding added above */
+}
+
+$border-style: 2px solid rgba(0,0,0,0.35);
+
+.vax-table {
+    white-space: nowrap;
+
+    background-color: #fff;
+    margin-bottom: 1.5rem;
+    
+    .vax-wrap {
+      white-space: normal;
+    }
+      
+    td, th {
+      background: aliceblue;
+      
+      padding: .5rem .75rem;
+    
+      vertical-align: middle;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    td.vax-width-limit,
+    th.vax-width-limit {
+      max-width: 10rem;
+    }
+
+    tr.vax-is-error td,
+    tr.vax-is-error th,
+    tr:hover.vax-is-error td,
+    tr:hover.vax-is-error th,
+    td.vax-is-error,
+    th.vax-is-error {
+      background-color: #ff3860;
+      color: #fff;
+    }
+
+    tr.vax-is-warning td,
+    tr.vax-is-warning th,
+    tr:hover.vax-is-warning td,
+    tr:hover.vax-is-warning th,
+    td.vax-is-warning,
+    th.vax-is-warning {
+      background-color: #ffdd57;
+      color: #000;
+    }
+    
+    /* CSS Specificity hack */
+    tr td.vax-cell-hidden.vax-cell-hidden, tr th.vax-cell-hidden.vax-cell-hidden {
+      background: transparent;
+      border: none;
+    }
+    
+    tr td.vax-cell-transparent, tr th.vax-cell-transparent{
+      background: transparent;
+    }
+
+    td.vax-cell-join-right, th.vax-cell-join-right {
+      border-right: none;
+    }
+
+    td.vax-cell-join, th.vax-cell-join {
+      border-right: none;
+      border-left: none;
+    }
+
+    td.vax-cell-join-left, th.vax-cell-join-left {
+      border-left: none;
+    }
+
+    tr.vax-table-row-separator {
+      td, th {
+        background: transparent;
+        border-left: none;
+        border-right: none;
+      }
+    }
+
+    td.vax-table-row-spacer-top, th.vax-table-row-spacer-top {
+        background: transparent;
+        border-top: none;
+    }
+    
+    tr.vax-table-row-lines {
+      td, th {
+          border-top: $border-style;
+          border-bottom: $border-style;
+      }
+    }
+
+    tr.vax-table-row-underline {
+      td, th {
+          border-bottom: $border-style;
+      }
+    }
+
+    tr.vax-table-row-overline {
+      td, th {
+          border-top: $border-style;
+      }
+    }
+
+    td.vax-cell-underscore, th.vax-cell-underscore {
+        border-bottom: $border-style;
+    }
+
+    td.vax-cell-border-right, th.vax-cell-border-right {
+        border-right: $border-style;
+    }
+
+    td.vax-text-align-left, th.vax-text-align-left {
+      text-align: left;
+    }
+    
+    td.vax-text-align-right, th.vax-text-align-right {
+      text-align: right;
+    }
+
+    th {
+      text-align: left;
+      font-weight: 400;
+    }
+    
+    th.vax-bold, .vax-bold th {
+      font-weight: 700;
+    }
+}
+
+.vax-table.vax-bkgd-transparent {
+    td, th {
+        background: transparent;
+    }
+}
+
+.vax-table-hover {
+    tr:hover {
+      td, th {
+        background-color: #b6e5ff;
+      }
+    }
+}

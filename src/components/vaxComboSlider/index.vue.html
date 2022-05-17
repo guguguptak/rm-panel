@@ -1,0 +1,6 @@
+  <vax-field :caption="caption" control-class="vax-flex-center">
+    <vax-input-num ref="input" :required="required" :name="inputName" class="vax-margin-right-wide"
+     :class="inputClass" :min="min" :max="max" :value="realValue" @input="updateFromInput()" :disabled="disabled" />
+    <vax-slider ref="slider" :required="required" :type="sliderType" :size="sliderSize"
+     :min="min" :max="max" :step="step" :value="realValue" is-fullwidth @change="updateFromSlider()" :disabled="disabled" />
+  </vax-field>

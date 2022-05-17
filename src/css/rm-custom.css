@@ -1,0 +1,10 @@
+@media print {
+}
+
+.footer {
+  padding: 0.5rem 1rem 1rem;
+}
+
+label .vax-icon-large {
+    display: block;
+}

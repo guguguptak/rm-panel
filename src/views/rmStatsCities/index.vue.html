@@ -1,0 +1,44 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+<template v-if="!jsonView.contextMissing">
+
+<div class="vax-wrapper-scrollbar-x">
+<table class="vax-table vax-table-hover">
+  <thead>
+	<tr class="vax-table-row-underline">
+		<td>Miasto</td>
+		<td>Stan<br />dzienników</td>
+		<td>(x2) Liczba<br />przejazdów</td>
+		<td>Aktywnych<br />uczestników</td>
+		<td>% frekwencji</td>
+	</tr>
+  </thead>
+  <tbody>
+	<tr class="vax-table-row-underline vax-bold">
+		<th>Suma</th>
+		<td>
+		  <vax-bool-icon :value="jsonView.cities.reduce( (b, clz) => b && clz.journalsOk, true )" />
+		</td>
+		<td class="vax-text-align-right">{{ jsonView.cities.reduce( (sum, clz) => sum + clz.cruiseCount, 0 ) * 2 }}</td>
+		<td class="vax-text-align-right">{{ jsonView.cities.reduce( (sum, clz) => sum + clz.activeCount, 0 ) }}</td>
+		<td class="vax-text-align-right vax-cell-transparent">
+<!-- {{ (jsonView.cities.reduce( (sum, clz) => sum + clz.freqRatio, 0 ) / jsonView.cities.length).toFixed(2) }} -->
+		</td>
+	</tr>
+	<tr v-for="city in jsonView.cities">
+		<th><div class="vax-flex-center-vertical">
+          <div>{{ city.name }}</div>
+          <div v-if="city.trophy" class="vax-flex-grow vax-flex-end vax-margin-left">
+            <vax-trophy :type="city.trophy" class="vax-float-right" />
+          </div>
+		</div></th>
+		<td><vax-bool-icon :value="city.journalsOk" /></td>
+		<td class="vax-text-align-right">{{ city.cruiseCount * 2 }}</td>
+		<td class="vax-text-align-right">{{ city.activeCount }}</td>
+		<td class="vax-text-align-right">{{ toPercentString( city.freqRatio ) }}</td>
+	</tr>
+  </tbody>
+</table>
+</div>
+
+</template>
+</vax-view>

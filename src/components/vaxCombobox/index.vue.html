@@ -1,0 +1,17 @@
+<div :class="horizontal ? 'vax-scoped-horiz' : ''">
+  <label v-if="this.$slots.default" class="caption"><slot /></label>
+  <p class="control">
+    <template v-if="autoDisabled || disabled" >
+      <input class="input" :value="disabledCaption" readonly />
+      <input type="hidden" :name="name" :value="disabledValue" />
+    </template>
+    <span v-else class="select">
+      <select :name="name" :class="selectClass" v-on="$listeners">
+        <option v-for="(actualValue,i) in actualValues"
+         :value="'' + actualValue" :selected="'' + actualValue === '' + selectedValue">
+          {{ captions[i] }}
+        </option>
+      </select>
+    </span>
+  </p>
+</div>

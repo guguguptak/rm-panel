@@ -1,0 +1,6 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass"
+ class="vax-width-limit-medium">
+
+  <rm-form-campaign @submit.prevent="submitPostUpdateContext" :action="postUrl" :values="jsonView" />
+
+</vax-view>

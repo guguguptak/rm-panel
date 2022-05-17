@@ -1,0 +1,61 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+<template v-if="!jsonView.contextMissing">
+
+<div class="vax-wrapper-scrollbar-x vax-margin-bottom-wide">
+<table class="vax-table vax-table-hover">
+  <thead>
+	<tr>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<template v-if="jsonView.possiblePersonalRewards.length === 1">
+		<td>Nagrody indywidualne</td>
+		</template>
+		<template v-else-if="jsonView.possiblePersonalRewards.length > 1">
+		<td class="vax-cell-join-right"><div class="vax-width-0">Nagrody indywidualne</div></td>
+		<td class="vax-cell-join" v-for="reward in jsonView.possiblePersonalRewards.length - 2"></td>
+		<td class="vax-cell-join-left"></td>
+		</template>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td class="vax-cell-hidden">&nbsp;</td>
+	</tr>
+	<tr>
+		<td>Nazwa jednostki</td>
+		<td>Dzielnica</td>
+		<td>Adres</td>
+		<td class="vax-wrap" v-for="item in jsonView.possiblePersonalRewards">{{ item.name }}</td>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td>Potwierdzenie<br />odbioru</td>
+	</tr>
+  </thead>
+	
+  <tbody v-for="(unitType,i) in jsonView.units">
+	<tr class="vax-table-row-lines vax-bold">
+		<td>{{ unitTypesPlural[i] }}</td>
+		<td class="vax-cell-transparent">&nbsp;</td>
+		<td class="vax-cell-transparent">&nbsp;</td>
+		<td v-for="(n,i) in jsonView.possiblePersonalRewards" class="vax-text-align-right">
+		  {{ unitType.reduce( (sum, unit) => sum + unit.personalRewardCount[i], 0 ) }}
+		</td>
+		<td class="vax-cell-hidden"></td>
+		<td class="vax-cell-transparent">&nbsp;</td>
+	</tr>
+	<tr v-for="(item,i) in unitType">
+		<th><div class="vax-flex-center-vertical">
+		    <div>{{ item.name }}</div>
+		    <div v-if="item.trophy" class="vax-flex-grow vax-flex-end vax-margin-left">
+		      <vax-trophy :type="item.trophy" class="vax-float-right" />
+		    </div>
+		</div></th>
+		<td>{{ item.district }}</td>
+		<td>{{ item.address }}</td>
+		<td v-for="cnt in item.personalRewardCount" class="vax-text-align-right">{{ cnt }}</td>
+		<td class="vax-cell-hidden"></td>
+		<td>&nbsp;</td>
+	</tr>
+  </tbody>
+</table>
+</div>
+
+</template>
+</vax-view>

@@ -1,0 +1,102 @@
+
+/* fix for problem described in https://stackoverflow.com/questions/17408815 */
+fieldset {
+    min-width: 0;
+    width: 100%;
+}
+
+@-moz-document url-prefix() {
+  fieldset {
+    display: table-cell;
+  }
+}
+
+.vax-fieldset:not(.vax-fieldset-invis) {
+    padding: 0.5rem 1rem 1.5rem;
+    border-color: rgba(255,255,255,0.5);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.vax-fieldset.vax-fieldset-invis {
+    border: none;
+}
+
+.vax-fieldset.vax-fieldset-tight {
+    padding-bottom: 0.5rem;
+}
+
+.vax-fieldset label {
+    font-weight: 400;
+}
+
+.vax-fieldset label.vax-bold {
+    font-weight: 700;
+}
+
+.vax-fieldset[disabled] .input, .vax-fieldset[disabled] .textarea, .vax-fieldset[disabled] .select select,
+.input[disabled], .textarea[disabled], .select select[disabled],
+.vax-fieldset[data-readonly] .input, .vax-fieldset[data-readonly] .textarea, .vax-fieldset[data-readonly] .select select,
+.input[readonly], .textarea[readonly], .select select[readonly] {
+    background-color: #F5F5F5;
+    box-shadow: none;
+    color: #7A7A7A;
+    cursor: not-allowed;
+    border-color: #DBDBDB;
+}
+
+.vax-fieldset.vax-legend-bar {
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    border-color: rgba(255,255,255,0.5);
+    border-radius: 0;
+
+    padding: 0.5rem 1rem 0.5rem;
+}
+
+.vax-legend {
+    font-weight: 700;
+    padding: 0 1rem;
+}
+
+.vax-large-input input[type="radio"],
+ .vax-large-input input[type="checkbox"] {
+    transform: scale(1.5);
+}
+
+.vax-form label .vax-icon-large {
+    display: block;
+}
+
+.vax-horiz-label-group label {
+    display: inline-block;
+}
+
+.vax-table input[type="number"] {
+    min-width: 3.5rem;
+}
+
+.vax-textarea {
+    padding-left: 1rem;
+    height: 100%;
+}
+
+input[type="number"] {
+    text-align: right;
+}
+
+.select select[multiple] option {
+    padding: .2rem 1rem 0.4rem 0.5rem;
+}
+
+.select[disabled]:not(.is-multiple):after,
+.select[data-readonly]:not(.is-multiple):after,
+.vax-fieldset[disabled] .select:not(.is-multiple):after,
+.vax-fieldset[data-readonly] .select:not(.is-multiple):after {
+    border-color: #000;
+}
+
+.field .control {
+    margin-top: 0.25rem;
+}

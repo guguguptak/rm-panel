@@ -1,0 +1,32 @@
+.vax-table {
+  .rm-journal-future-day {
+    background-color: #dee;
+  }
+
+  .rm-journal-present-day {
+    background-color: #fff;
+  }
+
+  .rm-journal-recent-past-day {
+    background-color: aliceblue;
+  }
+
+  .rm-journal-past-day {
+    background-color: #dee;
+  }
+}
+
+#cruises {
+    min-width: 250px;
+}
+
+.vax-table-hover {
+    tr:hover {
+      .rm-journal-past-day,
+      .rm-journal-recent-past-day,
+      .rm-journal-present-day,
+      .rm-journal-future-day {
+        background-color: #b6e5ff;
+      }
+    }
+}

@@ -1,0 +1,41 @@
+<div class="vax-dont-print">
+  <aside class="menu app-sidebar animated" :class="{ slideInLeft: show, slideOutLeft: !show }">
+    <!--
+    <p class="menu-caption">
+      General
+    </p>
+    -->
+    <ul class="menu-list">
+      <li v-for="(item, index) in menuItems">
+        <router-link v-if="item.path" :to="item.path" :exact="true"
+          :aria-expanded="isExpanded(item) ? 'true' : 'false'"
+          @click.native="toggle(index, item)" class="vax-flex-center-vertical">
+          <div class="icon"><i :class="['fa', item.meta.icon]"></i></div>
+          <span class="desc">{{ item.name }}</span>
+          <span class="icon is-angle" v-if="item.children">
+            <i class="fa fa-angle-down"></i>
+          </span>
+        </router-link>
+        <a v-else :aria-expanded="isExpanded(item)" @click="toggle(index, item)" class="vax-flex-center-vertical">
+          <div class="icon"><i :class="['fa', item.meta.icon]"></i></div>
+          <span class="desc">{{ item.name }}</span>
+          <span class="icon is-angle" v-if="item.children">
+            <i class="fa fa-angle-down"></i>
+          </span>
+        </a>
+<!--
+        <expanding v-if="item.children?.length">
+          <ul v-show="isExpanded(item)">
+            <li v-for="subItem in item.children" v-if="subItem.path">
+              <router-link :to="generatePath(item, subItem)">
+                {{ subItem.meta?.caption ?? subItem.name }} // note: ?. and ?? are currently unsupported in vue templates
+              </router-link>
+            </li>
+          </ul>
+        </expanding>
+-->
+      </li>
+    </ul>
+  </aside>
+  <app-footer class="vax-margin-top" />
+</div>

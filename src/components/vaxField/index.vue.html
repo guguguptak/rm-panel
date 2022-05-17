@@ -1,0 +1,8 @@
+  <div class="field">
+    <label v-if="caption !== undefined" class="caption vax-pre" :class="captionClass">{{ caption }}</label>
+    <div class="control" :class="controlClass">
+      <slot>
+        <!-- PLACEHOLDER create content for this slot -->
+      </slot>
+	</div>
+  </div>

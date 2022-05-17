@@ -1,0 +1,36 @@
+
+@font-face {
+    font-family: "rmIcons";
+    src: url("/font/rm-icons.woff") format("woff"),
+         url("/font/rm-icons.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.rm-icon {
+    font-family: "rmIcons";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 32px;
+    line-height: 1;
+}
+
+.rm-icon-color {
+    color: #27AAE1;
+}
+
+.rm-icon0 {
+    color: red;
+}
+
+.front-logo-small {
+    height: 24px;
+    margin-bottom: 3px;
+}
+
+.front-logo-medium {
+    height: 32px;
+    margin-bottom: 6px;
+}

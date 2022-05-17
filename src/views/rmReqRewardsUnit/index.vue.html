@@ -1,0 +1,126 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+<template v-if="!jsonView.contextMissing">
+
+<div class="vax-wrapper-scrollbar-x vax-margin-bottom-wide">
+<table class="vax-table vax-table-hover">
+  <thead>
+	<tr>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<template v-if="jsonView.possiblePersonalRewards.length === 1">
+		<td>Nagrody indywidualne</td>
+		</template>
+		<template v-else-if="jsonView.possiblePersonalRewards.length > 1">
+		<td class="vax-cell-join-right"><div class="vax-width-0">Nagrody indywidualne</div></td>
+		<td class="vax-cell-join" v-for="reward in jsonView.possiblePersonalRewards.length - 2"></td>
+		<td class="vax-cell-join-left"></td>
+		</template>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<!--
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		-->
+	</tr>
+  	<tr class="vax-table-row-underline">
+		<td>Oddział</td>
+		<td class="vax-wrap" v-for="reward in jsonView.possiblePersonalRewards">{{ reward.rewardName }}</td>
+		<td>Nagroda<br /> grupowa</td>
+		<!--
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td>Potwierdzenie<br />odbioru</td>
+		-->
+	</tr>
+  </thead>
+  <tbody>
+	<tr class="vax-table-row-underline vax-bold">
+		<td>Suma</td>
+		<td v-for="(n,i) in jsonView.possiblePersonalRewards" class="vax-text-align-right">
+		  {{ jsonView.clazzes.reduce( (sum, clz) => sum + clz.personalRewardCount[i], 0 ) }}
+		</td>
+		<td class="vax-cell-transparent">&nbsp;</td>
+		<!--
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td class="vax-cell-transparent">&nbsp;</td>
+		-->
+	</tr>
+	<tr v-for="clazz in jsonView.clazzes">
+		<th>
+          <div class="vax-flex-center-vertical">
+		    <div>{{ clazz.name }}</div>
+		    <div v-if="clazz.trophy" class="vax-flex-grow vax-flex-end vax-margin-left">
+		      <vax-trophy :type="clazz.trophy" class="vax-float-right" />
+		    </div>
+		  </div>
+		</th>
+		<td v-for="n in clazz.personalRewardCount" class="vax-text-align-right">{{ n }}</td>
+		<td>{{ clazz.groupReward }}</td>
+		<!--
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td>&nbsp;</td>
+		-->
+	</tr>
+  </tbody>
+</table>
+</div>
+
+<div class="vax-wrapper-scrollbar-x vax-margin-bottom-wide">
+<table class="vax-table vax-table-hover">
+  <thead>
+    <tr>
+      <td class="vax-cell-hidden">&nbsp;</td>
+      <td class="vax-cell-join-right"><div class="vax-width-0">Ważność</div></td>
+	  <td class="vax-cell-join-left"></td>
+    </tr>
+    <tr class="vax-table-row-underline">
+      <td>Nazwa</td>
+      <td>od</td>
+      <td>do</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="item in jsonView.possibleGroupRewards">
+      <td>{{ item.name }}</td>
+      <td>{{ item.validFrom }}</td>
+      <td>{{ item.validTo }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div v-if="jsonView.possiblePersonalRewards" class="vax-wrapper-scrollbar-x">
+<table class="vax-table vax-table-hover">
+  <thead>
+    <tr>
+      <td class="vax-cell-hidden"></td>
+      <td class="vax-cell-join-right"><div class="vax-width-0">Wiek</div></td>
+      <td class="vax-cell-join-left"></td>
+<!--
+      <td class="vax-cell-join-right"><div class="vax-width-0">Odbytych<br />przejazdów</div></td>
+      <td class="vax-cell-join-left"></td>
+-->
+    </tr>
+    <tr class="vax-table-row-underline">
+      <td>Nazwa</td>
+<!--
+      <td class="vax-numbers-2">min</td>
+      <td class="vax-numbers-2">max</td>
+-->
+      <td>min</td>
+      <td>max</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="reward in jsonView.possiblePersonalRewards">
+      <td>{{ reward.rewardName }}</td>
+<!--
+      <td class="vax-text-align-right">{{ reward.from }}</td>
+      <td class="vax-text-align-right">{{ reward.to }}</td>
+-->
+      <td>{{ getAgeOptionName( reward.ageCategoryMin ) }}</td>
+      <td>{{ getAgeOptionName( reward.ageCategoryMax ) }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</template>
+</vax-view>

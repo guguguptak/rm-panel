@@ -1,0 +1,9 @@
+<vax-box v-if="viewData && viewData.contextMissing" size="large" class="vax-bold hero is-bold">
+    {{ contextMissingMsg }}
+</vax-box>
+<vax-box v-else-if="viewData !== null" size="large" :bold="false" data-vaxquis>
+  <vax-box v-if="response !== undefined" size="large" class="vax-bold hero is-bold" :class="responseClass">
+    {{ response }}
+  </vax-box>
+  <slot><!-- PLACEHOLDER create content for this slot --></slot>
+</vax-box>

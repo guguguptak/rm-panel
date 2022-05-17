@@ -1,0 +1,9 @@
+  <vax-field class="vax-horiz-label-group"  :caption-class="captionClass" :control-class="controlClass"
+    :caption="caption" ref="inputs">
+    {{ }}
+    <vax-checkbox slot-before v-for="n in options" :key="n" :name="name + '[]'" :value="'' + n"
+     class="box vax-box-small vax-text-center" caption-class="vax-block" :disabled="disabled" v-on="$listeners"
+     :checked="isChecked[n]" @change="updateConstraint()" >
+      {{ captions ? captions[n] : '' }}
+    </vax-checkbox>
+  </vax-field>

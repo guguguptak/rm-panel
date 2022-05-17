@@ -1,0 +1,17 @@
+  <div class="vax-margin-bottom">
+    <vax-fieldset :caption="caption" class="vax-margin-bottom">
+      <vax-field class="vax-margin-left">
+       <template v-if="fileList">
+        <vax-checkbox v-for="(file,i) in fileList.files" :key="file.name" name="attach[]" :value="file.name"
+         :class="'vax-margin-bottom' + ( ( i === fileList.files.length - 1 ) ? '-minus-small' : '' )"
+         caption-class="vax-inline" input-class="vax-margin-right" class="vax-block">
+          {{ file.name }}
+        </vax-checkbox>
+       </template>
+      </vax-field>
+     </vax-fieldset>
+    <vax-button button-class="is-primary" @click="goTo">
+      {{ goToCaption }}
+    </vax-button>
+  </div>
+  

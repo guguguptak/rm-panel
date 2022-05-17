@@ -1,0 +1,5 @@
+<a class="icon nav-item" aria-hidden="true" v-on="$listeners">
+    <slot v-if="slotBefore" />
+    <i :class="cIconClass"></i>
+    <slot v-if="!slotBefore" />
+</a>

@@ -1,0 +1,115 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+
+<div class="vax-flex vax-margin-bottom-wide">
+
+<div class="vax-wrapper-scrollbar-x vax-inline-block">
+<table class="vax-table vax-inline-table vax-table-hover">
+  <thead>
+    <tr>
+      <td class="vax-cell-hidden">&nbsp;</td>
+      <td class="vax-cell-hidden">&nbsp;</td>
+      <td class="vax-cell-hidden">&nbsp;</td>
+      <td class="vax-cell-join-right"><div class="vax-width-0">Wiek</div></td>
+      <td class="vax-cell-join-left">&nbsp;</td>
+      <td class="vax-cell-join-right"><div class="vax-width-0">Ważność</div></td>
+      <td class="vax-cell-join-left">&nbsp;</td>
+      <td class="vax-cell-join-right"><div class="vax-width-0">Sztuk</div></td>
+      <td class="vax-cell-join-left">&nbsp;</td>
+      <td class="vax-cell-hidden">&nbsp;</td>
+    </tr>
+    <tr class="vax-table-row-underline">
+      <td class="vax-cell-hidden">&nbsp;</td>
+      <td>Nazwa</td>
+      <td>Priorytet</i></td>
+      <td>min</td>
+      <td>max</td>
+      <td>od</td>
+      <td>do</td>
+      <td>razem</td>
+      <td>zostało</td>
+      <td>Usuń</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(reward,i) in jsonView.rewards">
+      <td class="vax-text-align-right">{{ i+1 }}</td>
+      <td class="vax-icon-small-height">{{ reward.rewardName }}</td>
+      <td class="-vax-text-align-right">{{ reward.priority }}</td>
+      <td>{{ getAgeOptionName( reward.ageCategoryMin ) }}</td>
+      <td>{{ getAgeOptionName( reward.ageCategoryMax ) }}</td>
+      <td>{{ reward.validFrom }}</td>
+      <td>{{ reward.validTo }}</td>
+      <td class="vax-text-align-right">
+        <div v-if="reward.canEdit" class="vax-flex">
+          <input type="hidden" :value="reward.id"></input>
+          <vax-input-field v-model="reward.totalCount" type="number" name="name"
+           class="vax-margin-bottom-none vax-numbers-3" />
+          <vax-button button-class="is-warning vax-button-small"
+           @click="editGroupReward">
+            <i class="fa fa-edit"></i>
+          </vax-button>
+        </div>
+        <span v-else>{{ reward.totalCount }}</span>
+      </td>
+      <td class="vax-text-align-right">{{ reward.remainingCount }}</td>
+      <td>
+        <button v-if="reward.canEdit" class="button vax-button-small is-danger"
+          @click="submitPostDirect( { formName: 'removeGroupReward', id: reward.id } )">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<vax-form name="addGroupReward" :action="postUrl" method="POST" @submit.prevent="submitPostAndReset"
+ submit-caption="Dodaj nagrodę">
+
+<div class="vax-wrapper-scrollbar-x vax-inline-block vax-margin-bottom">
+<table class="vax-table vax-inline-table vax-table-hover">
+  <thead>
+    <tr>
+      <td class="vax-cell-hidden">&nbsp;</td>
+      <td class="vax-cell-hidden">&nbsp;</td>
+      <td class="vax-cell-join-right"><div class="vax-width-0">Wiek</div></td>
+      <td class="vax-cell-join-left">&nbsp;</td>
+      <td class="vax-cell-join-right"><div class="vax-width-0">Ważność</div></td>
+      <td class="vax-cell-join-left">&nbsp;</td>
+    </tr>
+    <tr class="vax-table-row-underline">
+      <td>Nazwa</td>
+      <td>Priorytet</td>
+      <td>min</td>
+      <td>max</td>
+      <td>od</td>
+      <td>do</td>
+      <td>Sztuk razem</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input name="rewardName" class="input vax-icon-small-height" required maxlength="50" /></td>
+      <td><input name="priority" type="number" class="input vax-numbers-2 vax-text-align-right" required /></td>
+      <td><rm-age-category-select name="ageCategoryMin" /></td>
+      <td><rm-age-category-select name="ageCategoryMax" /></td>      
+      <td>
+        <date-picker :config="datePickerConfig1" value="" name="validFrom"
+          class="input" placeholder="dd-mm-rrrr" />
+      </td>
+      <td>
+        <date-picker :config="datePickerConfig1" value="" name="validTo"
+          class="input" placeholder="dd-mm-rrrr" />
+      </td>
+      <td><input name="totalCount" type="number" class="input vax-numbers-4 vax-text-align-right" required /></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+</vax-form>
+
+</vax-view>

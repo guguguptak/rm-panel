@@ -1,0 +1,59 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+<template v-if="!jsonView.contextMissing">
+
+<div class="vax-wrapper-scrollbar-x">
+
+<table class="vax-table vax-table-hover">
+<thead>
+	<tr>
+	    <td class="vax-cell-hidden">&nbsp;</td>
+	    <td class="vax-cell-hidden">&nbsp;</td>
+	    <td class="vax-cell-hidden">&nbsp;</td>
+	    <template v-if="jsonView.printMaterialTypes.length === 1">
+		<td>Potrzebne wydruki</td>
+		</template>
+		<template v-else-if="jsonView.printMaterialTypes.length > 1">
+		<td class="vax-cell-join-right"><div class="vax-width-0">Potrzebne wydruki</div></td>
+		<td class="vax-cell-join" v-for="reward in jsonView.printMaterialTypes.length - 2"></td>
+		<td class="vax-cell-join-left"></td>
+		</template>
+	    <td class="vax-cell-hidden">&nbsp;</td>
+	    <td class="vax-cell-hidden">&nbsp;</td>
+	</tr>
+	<tr class="vax-table-row-underline">
+		<td>Nazwa jednostki</td>
+		<td>Dzielnica</td>
+		<td>Adres</td>
+		<template v-for="(pmt,i) in jsonView.printMaterialTypes">
+		<td>{{ printMaterialTypes[pmt] }}</td>
+		</template>
+		<td class="vax-cell-hidden">&nbsp;</td>
+		<td>Potwierdzenie<br />odbioru</td>
+	</tr>
+	</thead>
+	<tbody v-for="(unitType,i) in jsonView.units">
+	<tr class="vax-table-row-lines vax-bold">
+		<td>{{ unitTypesPlural[i] }}</td>
+		<td class="vax-cell-transparent">&nbsp;</td>
+		<td class="vax-cell-transparent">&nbsp;</td>
+		<td v-for="pmt in jsonView.printMaterialTypes" class="vax-text-align-right">
+		  {{ unitType.reduce( (sum, u) => sum + u.pmtCounts[pmt], 0 ) }}
+		</td>
+		<td class="vax-cell-hidden"></td>
+		<td class="vax-cell-transparent">&nbsp;</td>
+	</tr>
+	<tr v-for="(unit,i) in unitType">
+		<th>{{ unit.name }}</th>
+		<td>{{ unit.district }}</td>
+		<td>{{ unit.address }}</td>
+		<td v-for="pmt in jsonView.printMaterialTypes" class="vax-text-align-right">{{ unit.pmtCounts[pmt] }}</td>
+		<td class="vax-cell-hidden"></td>
+		<td>&nbsp;</td>
+	</tr>
+	</tbody>
+</table>
+
+</div>
+
+</template>
+</vax-view>

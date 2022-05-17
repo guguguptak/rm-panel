@@ -1,0 +1,9 @@
+<div class="vax-box"
+ :class="'vax-box-' + size
+  + ' ' + ( bold ? 'vax-bold' : '' )
+  + ' ' + ( shadow ? 'vax-box-shadow' : '' )
+  + ' ' + ( rounded ? 'vax-rounded' : '' ) ">
+  <slot>
+    <!-- PLACEHOLDER create content for this slot -->
+  </slot>
+</div>

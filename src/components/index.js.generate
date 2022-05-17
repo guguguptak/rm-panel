@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then
+  name="index.js"
+ else
+  name="$1"
+fi
+  
+cp $name.template $name
+echo >> $name
+for dir in *; do
+  if [[ -d "${dir}" ]]; then
+    echo "export $dir from \"./$dir\";" >> $name
+  fi
+done

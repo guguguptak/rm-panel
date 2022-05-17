@@ -1,0 +1,93 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+
+<template v-if="jsonView && !jsonView.contextMissing">
+
+<vax-box class="vax-margin-right-wide" size="medium" :shadow="false">
+  Liczba osób:
+</vax-box>
+<vax-box size="medium">
+  Zadeklarowana: {{ jsonView.declaredCount }}
+</vax-box>
+<vax-box size="medium" class="hero"
+ :class="( jsonView.declaredCount === jsonView.participants.length ) ? 'is-success' : 'is-danger'">
+  Obecna: {{ jsonView.participants.length }}
+</vax-box>
+
+<vax-form  v-if="jsonView.participants.length > 0" :has-submit="jsonView.canSelectRewards || jsonView.canSelectCruises"
+ name="journalEdit" :action="postUrl" method="POST" @submit.prevent="submitPost">
+
+<template v-if="jsonView.hasRewards">
+<vax-combobox class="vax-inline-block vax-margin-right-wide vax-margin-left" horizontal
+ name="preferredGroupReward" :captions="jsonView.possibleGroupRewards.names" :values="jsonView.possibleGroupRewards.ids"
+ :selected-value="jsonView.preferredGroupRewardId" :disabled="!jsonView.canSelectRewards" >
+Nagroda preferowana:
+</vax-combobox>
+<vax-combobox class="vax-inline-block vax-margin-bottom vax-margin-left" horizontal
+ name="unwantedGroupReward" :captions="jsonView.possibleGroupRewards.names" :values="jsonView.possibleGroupRewards.ids"
+ :selected-value="jsonView.unwantedGroupRewardId" :disabled="!jsonView.canSelectRewards" >
+Nagroda niepożądana: 
+</vax-combobox>
+</template>
+
+<div class="vax-wrapper-scrollbar-x">
+<table class="vax-table">
+  <thead>
+    <tr class="vax-table-row-underline">
+      <td class="vax-cell-hidden vax-table-ordinal">&nbsp;</td>
+      <td>Imię/nazwisko</td>
+      <td v-if="jsonView.canSelectCruises && jsonView.dateNrs.length > 0">
+        <vax-combobox class="vax-flex-center" :selected-value="jsonView.dateNr"
+         name="dayNr" @change="changeDayNr" :captions="jsonView.dateCaptions" :values="jsonView.dateNrs" />
+      </td>
+    <td v-if="jsonView.canRemove">Usuń<br />osobę</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(pcp,i) in jsonView.participants">
+      <td class="vax-text-align-right vax-table-ordinal">{{ i + 1 }}</td>
+      <td class="pcp-name vax-text-large">
+         <div v-if="jsonView.canEdit" class="vax-flex">
+          <input type="hidden" :value="pcp.id"></input>
+          <vax-input-field v-model="pcp.name" name="name" class="vax-margin-bottom-none" maxlength="50" />
+          <vax-button button-class="is-warning vax-button-small"
+           @click="editParticipant">
+            <i class="fa fa-edit"></i>
+          </vax-button>
+         </div>
+         <span v-else>{{ pcp.name }}</span>         
+      </td>
+      <td v-if="jsonView.canSelectCruises && jsonView.dateNrs.length > 0">
+        <rm-t12n-select :options="jsonView.t12ns" :name-suffix="'['+i+']'" :i="i"
+         :iChecked="[pcp.t12n]" />
+      </td>
+      <td v-if="jsonView.canRemove">
+        <vax-button button-class="is-danger vax-button-small"
+         @click="submitPostDirect( { formName: 'removeParticipants', id: pcp.id } );">
+          <i class="fa fa-ban"></i>
+        </vax-button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<input type="hidden" name="dateNr" :value="jsonView.dateNr"/>
+</vax-form>
+
+<vax-button v-if="jsonView.canRemove && jsonView.participants.length > 0" button-class="is-danger vax-margin-top"
+ @click="submitPostDirect( { formName: 'removeParticipants', removeAll: true } )">
+  wyczyść cały dziennik
+</vax-button>
+
+
+<vax-form v-if="jsonView.canAdd" name="addParticipants" :action="postUrl" method="POST"
+ @submit.prevent="submitPostAndReset"
+ submit-caption="Dodaj" submit-button-class="is-primary vax-width-100pct">
+
+<vax-box size="large" class="vax-margin-top vax-margin-bottom">
+  <vax-input-field caption="Dodaj osobę/osoby..." name="names" placeholder="imię i nazwisko; imię i nazwisko..." />
+</vax-box>
+
+</vax-form>
+
+</template>
+</vax-view>

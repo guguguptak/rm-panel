@@ -1,0 +1,20 @@
+  <div class="app-main">
+    <div class="app-content vax-print-no-padding">
+      <transition
+        mode="out-in"
+        enter-active-class="vax-opacity-0"
+        leave-active-class="vax-opacity-0"
+        >
+        <router-view class="vax-transition-opacity" :key="$route.fullPath" />
+      </transition>
+      <!--
+      <transition
+        mode="out-in"
+        enter-active-class="vax-opacity-0"
+        leave-active-class="vax-opacity-0"
+        >
+        <app-footer />
+      </transition>
+      -->
+    </div>
+  </div>

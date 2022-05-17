@@ -1,0 +1,85 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
+<template v-if="!jsonView.contextMissing">
+
+<vax-box size="medium">Rodzaj wysyłanych zaproszeń: {{ permissionTypeToName( jsonView.permissionType ) }}</vax-box>
+
+<div class="vax-wrapper-scrollbar-x">
+
+<div v-for="userGroup in jsonView.userGroups">
+<vax-box size="medium" class="vax-margin-left vax-margin-top-small">
+  {{ permissionTypeToName( userGroup.type ) }}
+</vax-box>
+<vax-box size="medium">
+  Liczba osób: {{ userGroup.list.length }}
+</vax-box>
+<table class="vax-table">
+  <thead>
+  <tr class="vax-table-row-underline vax-bold">
+    <td>Imię i nazwisko</td>
+    <td>Zarządza</td>
+    <td>Email</td>
+    <td>Ostatnie logowanie</td>
+    <td>Więcej...</td> 
+  </tr>
+  </thead>
+  <tbody>
+  <tr v-for="(user,i) in userGroup.list">
+    <td class="vax-wrap">{{ user.name }}</td>
+    <td>{{ userManages( user ) }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.lastLogin }}</td>
+    <td>
+      <div class="vax-flex-center">
+        <vax-button class="vax-flex-center vax-margin-bottom-none"
+         button-class="is-primary vax-button-small"
+         @click="goToUserSettings( user.id )">
+          <i class="fa fa-wrench"></i>
+        </vax-button>
+        <vax-button v-if="user.canBeDeleted" class="vax-flex-center vax-margin-left"
+         button-class="is-danger vax-button-small"
+         @click="submitPostDirect( { formName: 'deleteUser', id: user.id } )">
+          <i class="fa fa-trash-o"></i>
+        </vax-button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<div class="box vax-margin-top" v-if="jsonView.canInvite">
+  <vax-form name="invite" :action="postUrl" method="POST" @submit.prevent="submitPost">
+    <vax-input-field caption="Temat wiadomości" name="mailSubject" value="Rowerowy Maj - zaproszenie do udziału" />
+    <vax-field caption="Treść wiadomości">
+<textarea name="mailContent" class="textarea vax-textarea">
+Dzień dobry,
+zostałeś zaproszony do współpracy w ramach kampanii "Rowerowy Maj".
+Wejdź na stronę systemu RM Panel znajdującą się pod adresem https://bo.rowerowymaj.eu ,
+a następnie zaloguj się danymi, które otrzymasz w następnej wiadomości email.
+</textarea>
+    </vax-field>
+
+    <vax-file-select v-if="jsonView.canAttach" :file-list="fileList"
+     caption="Załączniki" go-to-caption="Dodaj inne załączniki..." go-to-path="/files" />
+
+    <vax-file-input class="has-name is-boxed" caption="Wybierz plik CSV..."/>
+    <vax-button button-class="is-primary" @click="importFromCsv">
+      Importuj listę adresatów z CSV
+    </vax-button>
+    <vax-input-field caption="Nazwa" name="name"
+     placeholder="nazwa; nazwa; nazwa" />
+    <vax-input-field caption="Email" name="email"
+     placeholder="email; email; email" />
+<!--
+    <div class="vax-bold">
+      Sposób wysyłki:
+      <vax-combobox class="vax-margin-top" :captions="mailerTypes" />
+    </div>
+-->
+  </vax-form>
+</div>
+
+</template>
+</vax-view>

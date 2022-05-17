@@ -1,0 +1,38 @@
+<vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass"
+  class="vax-width-limit-medium">
+
+<!-- NOTE: turn this into rmFileViewNav component ? -->
+<div class="vax-flex" v-if="jsonView.canAccessFilesManaged">
+  <vax-button class="vax-margin-right" button-class="is-info"
+   @click="$router.push( '/files' )">
+    Dostępne pliki
+  </vax-button>
+  <vax-button class="vax-margin-right" button-class="is-info"
+   @click="$router.push( '/filesManaged' )">
+    Zarządzane pliki
+  </vax-button>
+  <vax-button class="vax-margin-right" button-class="" v-if="jsonView.canAccessFilesAll"
+   @click="$router.push( '/filesAll' )">
+    Wszystkie pliki
+  </vax-button>
+</div>
+
+<!-- NOTE: turn this into rmFileList component ? -->
+<vax-box v-if="fileListAll" size="large">
+<div class="vax-margin-bottom">Wszystkie pliki:</div>
+<hr />
+<div v-for="file in fileListAll.files" class="vax-margin-bottom vax-flex-center-vertical">
+  <vax-form v-if="file.canDeleteFile" name="deleteFile"
+   class="vax-inline vax-inline-flex-center-vertical vax-margin-right-medium"
+   submit-button-class="is-danger vax-fa" :submit-caption="deleteCaption" :submit-button-margins="false"
+   :action="deleteUrl" method="DELETE" @submit.prevent="submitDelete">
+    <input type="hidden" name="mode" value="file" />
+    <input type="hidden" name="filename" :value="file.name" />
+  </vax-form>
+  <a :href="getDownloadLink( file.name )">
+    <i class="fa fa-file-o vax-margin-right"></i>{{ file.name }}<br />{{ aclString( file.meta ) }}
+  </a>
+</div>
+</vax-box>
+
+</vax-view>
