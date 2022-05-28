@@ -1,0 +1,30 @@
+{
+	"ids": {
+		"campaign": [
+		  1
+		],
+		"city": [
+		  1
+		],
+		"unit": [
+		  1
+		],
+		"clazz": [
+		  1
+		]
+	},
+	"names": {
+		"campaign": [
+		  "dupa"
+		],
+		"city": [
+		  "pipa"
+		],
+		"unit": [
+		  "kutas"
+		],
+		"clazz": [
+		  "beniz"
+		]
+	}
+}
