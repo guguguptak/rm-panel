@@ -2,7 +2,7 @@
     :caption="caption" ref="inputs">
     {{ }}
     <vax-checkbox slot-before v-for="n in options" :key="n" :name="name + '[]'" :value="'' + n"
-     class="box vax-box-small vax-text-center" caption-class="vax-block" :disabled="disabled" v-on="$listeners"
+     class="box vax-box-small vax-text-center" caption-class="vax-block" :disabled="disabled" v-bind="$attr"
      :checked="isChecked[n]" @change="updateConstraint()" >
       {{ captions ? captions[n] : '' }}
     </vax-checkbox>

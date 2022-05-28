@@ -6,7 +6,7 @@
       <input type="hidden" :name="name" :value="disabledValue" />
     </template>
     <span v-else class="select">
-      <select :name="name" :class="selectClass" v-on="$listeners">
+      <select :name="name" :class="selectClass" v-bind="$attr">
         <option v-for="(actualValue,i) in actualValues"
          :value="'' + actualValue" :selected="'' + actualValue === '' + selectedValue">
           {{ captions[i] }}

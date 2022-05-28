@@ -4,7 +4,7 @@
         <span :title="titles[n]" class="vax-block"
          :class="['vax-icon','vax-icon-' + size, spanClass, iconPrefix + n]">{{ captions ? captions[n] : '' }}</span>
         <input :type="type" :name="name + nameSuffix + '[]'" :value="n"
-         :checked="isChecked[n]" :disabled="disabled" v-on="$listeners"
+         :checked="isChecked[n]" :disabled="disabled" v-bind="$attr"
          @change="updateConstraint()" />
       </label>
     </template>

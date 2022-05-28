@@ -70,7 +70,10 @@ fieldset {
 }
 
 .vax-horiz-label-group label {
-    display: inline-block;
+    /* display: inline-block; */
+	display: inline-flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .vax-table input[type="number"] {

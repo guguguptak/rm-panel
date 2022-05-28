@@ -1,0 +1,52 @@
+{
+  "canEdit": true,
+  "canSelectCruises": true,
+  "canRemove": true,
+  "canAdd": true,
+  "hasRewards": true,
+  "canSelectRewards": true,
+  "t12ns": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "dateNrs": [
+    0,
+    1,
+    2
+  ],
+  "dateCaptions": [
+    "1 maj",
+    "2 maj",
+    "3 maj"
+  ],
+  "declaredCount": 3,
+  "participants": [
+    {
+      "name": "chujew"
+    },
+    {
+      "name": "mujew"
+    },
+    {
+      "name": "wujew"
+    }
+  ],
+  "possibleGroupRewards": {
+    "names": [
+      "cebula",
+      "cwancykator"
+    ],
+    "ids": [
+      0,
+      1
+    ]
+  },
+  "unwantedGroupRewardId": 0,
+  "preferredGroupRewardId": 1
+}

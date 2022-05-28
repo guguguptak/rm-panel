@@ -3,8 +3,5 @@
 
 export default {
   name: "appHome",
-  data () {
-    return this.$store.state.pkg;
-  }
 }
 

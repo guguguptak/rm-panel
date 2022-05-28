@@ -2,9 +2,6 @@ import store from "@/store";
 import { SET_ACCESS_LEVEL } from "@/store/mutation-types.js";
 
 export default {
-  data () {
-      return this.$store.state.pkg;
-  },
   methods: {
 /*
     // debugging helper method

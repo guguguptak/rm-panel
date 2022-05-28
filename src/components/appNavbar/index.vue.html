@@ -38,8 +38,8 @@
         </div>
         <div class="nav-right vax-flex vax-dont-print">
          <div class="nc-wrapper">    
-          <vax-link-icon title="Pomoc" img="question" :href="'/docs/RM_Panel' + accessLevel + '.pdf'" target="_blank" />
-          <vax-link-icon title="Drukuj..." img="print" onClick="window.print();" />
+          <vax-link-icon title="Pomoc" img="question" :href="'/docs/MM_Panel' + accessLevel + '.pdf'" target="_blank" />
+          <vax-link-icon title="Drukuj..." img="print" @click="window.print()" />
          </div>
          <div class="nc-wrapper">
           <vax-link-icon title="Ustawienia konta" img="cog" @click="goTo('/accountSettings')" />

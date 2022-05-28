@@ -1,6 +1,6 @@
   <vax-field :caption="caption" :caption-class="captionClass" :control-class="controlClass">
-      <vax-input-num v-if="type === 'number'" :name="name" :value="value" v-bind="$attrs" v-on="$listeners"
+      <vax-input-num v-if="type === 'number'" :name="name" :value="modelValue" v-bind="$attrs"
        :placeholder="placeholder" :required="required" :disabled="disabled" :pattern="pattern" :maxlength="maxlength" />
-      <vax-input v-else :type="type" :name="name" :value="value" v-bind="$attrs" v-on="$listeners"
+      <vax-input v-else :type="type" :name="name" :value="modelValue" v-bind="$attrs"
        :placeholder="placeholder" :required="required" :disabled="disabled" :pattern="pattern" :maxlength="maxlength" />
   </vax-field>

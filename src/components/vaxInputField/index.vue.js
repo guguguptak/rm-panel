@@ -8,7 +8,7 @@ export default {
     vaxInput,
     vaxInputNum,
   },
-  
+
   props: {
     name: String,
     caption: String,
@@ -17,7 +17,7 @@ export default {
     placeholder: String,
     pattern: String,
     disabled: Boolean,
-    value: [ String, Number ],
+    modelValue: [ String, Number ],
     maxlength: [ Number, String ],
     required: {
       type: Boolean,

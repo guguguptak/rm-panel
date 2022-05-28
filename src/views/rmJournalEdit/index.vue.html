@@ -25,7 +25,7 @@ Nagroda preferowana:
 <vax-combobox class="vax-inline-block vax-margin-bottom vax-margin-left" horizontal
  name="unwantedGroupReward" :captions="jsonView.possibleGroupRewards.names" :values="jsonView.possibleGroupRewards.ids"
  :selected-value="jsonView.unwantedGroupRewardId" :disabled="!jsonView.canSelectRewards" >
-Nagroda niepożądana: 
+Nagroda niepożądana:
 </vax-combobox>
 </template>
 
@@ -47,14 +47,14 @@ Nagroda niepożądana:
       <td class="vax-text-align-right vax-table-ordinal">{{ i + 1 }}</td>
       <td class="pcp-name vax-text-large">
          <div v-if="jsonView.canEdit" class="vax-flex">
-          <input type="hidden" :value="pcp.id"></input>
+          <input type="hidden" :value="pcp.id" />
           <vax-input-field v-model="pcp.name" name="name" class="vax-margin-bottom-none" maxlength="50" />
           <vax-button button-class="is-warning vax-button-small"
            @click="editParticipant">
             <i class="fa fa-edit"></i>
           </vax-button>
          </div>
-         <span v-else>{{ pcp.name }}</span>         
+         <span v-else>{{ pcp.name }}</span>
       </td>
       <td v-if="jsonView.canSelectCruises && jsonView.dateNrs.length > 0">
         <rm-t12n-select :options="jsonView.t12ns" :name-suffix="'['+i+']'" :i="i"

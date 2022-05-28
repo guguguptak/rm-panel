@@ -17,8 +17,8 @@ httpGet(
   API_GET_JSON_URL + "/mode/userRole.json",
   ( resp ) => {
     const userRole = resp.data.userRole;
-    if ( roleToAccessLevel[resp.data.userRole] === 0 ) {
-        // window.location = "/login";
+    if ( !roleToAccessLevel[resp.data.userRole] ) { // handle both 0 and undefined
+        window.location = "/login";
     } else {
         store.commit( SET_USER_ROLE, userRole );
         runApp();

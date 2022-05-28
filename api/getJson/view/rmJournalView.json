@@ -1,0 +1,71 @@
+{
+  "dates": [
+    {
+      "label": "1 maj",
+      "timeline": "past",
+      "editable": false
+    },
+    {
+      "label": "2 maj",
+      "timeline": "past",
+      "editable": false
+    },
+    {
+      "label": "3 maj",
+      "timeline": "past",
+      "editable": false
+    },
+    {
+      "label": "4 maj",
+      "timeline": "recent-past",
+      "editable": true
+    },
+    {
+      "label": "5 maj",
+      "timeline": "recent-past",
+      "editable": true
+    },
+    {
+      "label": "6 maj",
+      "timeline": "present",
+      "editable": true
+    },
+    {
+      "label": "7 maj",
+      "timeline": "future",
+      "editable": false
+    },
+    {
+      "label": "8 maj",
+      "timeline": "future",
+      "editable": false
+    },
+    {
+      "label": "1 maj",
+      "timeline": "past",
+      "editable": false
+    }
+  ],
+  "reward": {
+    "validFrom": "wielki wybuch",
+    "validTo": "koniec świata",
+    "name": "pipki"
+  },
+  "participants": [
+    {
+      "name": "chujew",
+      "reward": "cebula",
+      "cruises": [
+        0,
+        1,
+        0,
+        2,
+        3,
+        0,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
-  <vax-field v-bind="$attrs">
-    <button class="button" :class="buttonClass" :type="type" v-on="$listeners">
+  <vax-field>
+    <button class="button" :class="buttonClass" :type="type" v-bind="$attrs">
       <slot>Wyślij</slot>
     </button>
   </vax-field>

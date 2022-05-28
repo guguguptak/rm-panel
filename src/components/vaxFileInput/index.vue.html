@@ -1,7 +1,7 @@
 <vax-field class="file" @reset="resetFilename">
     <label class="file-label">
       <input class="file-input" type="file" :name="name" @change="updateFilename" @reset="resetFilename"
-        v-on="$listeners" />
+        v-bind="$attr" />
       <span class="file-cta">
         <span class="file-icon">
           <i class="fa fa-upload"></i>

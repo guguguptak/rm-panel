@@ -55,29 +55,40 @@ export function runApp() {
 //  store.commit( ROUTE_CHANGING, false );
   } );
 
-  createApp( Main )
-      .use( store )
-      .use( router )
-      .mount( "#app" );
+  const app = createApp( Main );
+
+  app.use( store )
+      .use( router );
+
+  app.config.globalProperties.window = window;
 
   const updateContext = () => {
+	let ctx = 0;
     httpGet(
         API_GET_JSON_URL + "/mode/currentContext.json",
         ( resp ) => {
           store.commit( SET_CURRENT_CONTEXT, resp.data.currentContext );
+		  ctx++;
+		  if ( ctx === 2 ) {
+			  app.mount( "#app" )
+		  }
         }
     );
     httpGet(
         API_GET_JSON_URL + "/mode/possibleContexts.json",
         ( resp ) => {
           store.commit( SET_POSSIBLE_CONTEXTS, resp.data.possibleContexts );
+		  ctx++;
+		  if ( ctx === 2 ) {
+			  app.mount( "#app" )
+		  }
         }
     );
   };
 
   updateContext();
 
-  Main.$on( "updateContext", updateContext );
+  // Main.$on( "updateContext", updateContext );
 
 // export { app, router, store }
 }
