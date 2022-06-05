@@ -1,0 +1,19 @@
+{
+  "canEdit": true,
+  "declaredCounts": {
+    "kids": 1200,
+    "adults": 34,
+    "clazzes": 18
+  },
+  "levelCounts": [
+    0,10
+  ],
+  "maxOrdinal": [
+    1,2,3,4,5,6
+  ],
+  "unitType": [
+    1
+  ],
+  "counts": {}
+
+}
