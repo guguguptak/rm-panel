@@ -1,0 +1,16 @@
+{
+  "unit": {
+      "name": "wazny",
+      "clazz": {
+        "id": 1,
+        "name": "sokol",
+        "freqRatio": 3,
+        "amountRequired": 1,
+        "preferredRewardImpossible": true,
+        "possibleRewardsNames": "bibuła",
+        "possibleRewardsIds": 2,
+        "suggestedReward": "pasikonik",
+        "canAssignReward": true
+      }
+  }
+}

@@ -97,7 +97,7 @@ const state = {
       meta: {
         icon: "fa-trophy vax-red",
       },
-      component: lazyLoading("rmRewardsGroup")
+      component: lazyLoading("rmRewardsGroup.json")
     },
     {
       name: "Przyznaj nagrody grupowe",

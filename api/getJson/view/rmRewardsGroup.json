@@ -1,0 +1,26 @@
+{"rewards":[
+  {
+    "rewardName": "cebula",
+    "priority": 1,
+    "ageCategoryMin": 1,
+    "ageCategoryMax": 3,
+    "validFrom": "tommorow",
+    "validTo": "next month",
+    "canEdit": true,
+    "totalCount": 4,
+    "remainingCount": 3
+
+  },
+  {
+    "rewardName": "cwancyfikator",
+    "priority": 2,
+    "ageCategoryMin": 1,
+    "ageCategoryMax": 3,
+    "validFrom": "tommorow",
+    "validTo": "next month",
+    "canEdit": true,
+    "totalCount": 3,
+    "remainingCount": 2
+
+  }
+]}

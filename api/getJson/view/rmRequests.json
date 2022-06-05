@@ -1,0 +1,42 @@
+{
+  "acceptedTotal": {
+    "units": [
+      {
+        "unit": {
+          "verdictPending": false,
+          "isAccepted": true,
+          "isRemovable": true,
+          "id": 1,
+          "unitName": "dół",
+          "unitDistrict": "dolowydol",
+          "declaredAdults": 100,
+          "declaredKids": 3333,
+          "declaredClazzes": 12,
+          "countAdults": 23,
+          "countKids": 2433,
+          "countClazzes": 5
+        }
+      },
+      {
+        "unit": {
+          "verdictPending": true,
+          "isAccepted": true,
+          "isRemovable": true,
+          "id": 2,
+          "unitName": "gora",
+          "unitDistrict": "gorlaskagora",
+          "declaredAdults": 200,
+          "declaredKids": 30485,
+          "declaredClazzes": 30,
+          "countAdults": 33,
+          "countKids": 3333,
+          "countClazzes": 3
+        }
+      }
+    ]
+  },
+  "kids": 2045000,
+  "adults": 20000,
+  "clazzes": 3000
+}
+
