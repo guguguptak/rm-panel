@@ -56,7 +56,7 @@
   <td class="vax-text-align-right" v-for="ageOption in ageOptionsPresent">{{ reward.countByAge[ageOption] }}</td>
   <td class="vax-text-align-right">
     <div v-if="reward.canEdit" class="vax-flex">
-      <input type="hidden" :value="reward.id"></input>
+      <input type="hidden" :value="reward.id">
       <vax-input-field v-model="reward.totalCount" type="number" name="name"
        class="vax-margin-bottom-none vax-numbers-3" />
       <vax-button button-class="is-warning vax-button-small"
