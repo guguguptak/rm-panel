@@ -1,51 +1,56 @@
-
 <vax-form :name="name" :action="action" method="POST" @submit.prevent="submitPost"
- :disabled="disabled" :has-submit="!disabled" :caption="hasCaption ? 'Informacje o mieście' : undefined">
+          :disabled="disabled" :has-submit="!disabled" :caption="hasCaption ? 'Informacje o mieście' : undefined">
 
-  <vax-input-field caption="Nazwa miasta lub gminy" name="cityName"
-   placeholder="nazwa miasta" :value="values.cityName" maxlength="50" />
+    <vax-input-field caption="Nazwa miasta lub gminy" name="cityName"
+                     placeholder="nazwa miasta" :value="values.cityName" maxlength="50"/>
 
- <vax-fieldset caption="Adres instytucji realizującej kampanię">
-  <vax-input-field caption="Nazwa instytucji" name="coordUnitName"
-   placeholder="nazwa" :value="values.coordUnitName" maxlength="100" />
-  <vax-input-field caption="Ulica i numer" name="coordUnitStreet"
-   placeholder="ulica i nr" :value="values.coordUnitStreet" maxlength="50" />
-  <vax-input-field caption="Miasto" name="coordUnitCity"
-   placeholder="nazwa miasta" :value="values.coordUnitCity" maxlength="50" />
-  <vax-input-field caption="Kod pocztowy" name="coordUnitZipCode"
-   placeholder="xx-xxx" :value="values.coordUnitZipCode" pattern="[0-9]{2}-?[0-9]{3}" maxlength="10" />
-  <vax-input-field caption="Numer telefonu" name="coordUnitPhone" type="tel" pattern="[0-9 +]{9,16}"
-   placeholder="xxx xxx xxx" :value="values.coordUnitPhone" maxlength="20" />
-  <vax-input-field caption="Adres email" name="coordUnitEmail" type="email"
-   placeholder="abc@xyz.com" :value="values.coordUnitEmail" maxlength="50" />
- </vax-fieldset>
+    <vax-fieldset caption="Adres instytucji realizującej kampanię">
+        <vax-input-field caption="Nazwa instytucji" name="coordUnitName"
+                         placeholder="nazwa" :value="values.coordUnitName" maxlength="100"/>
+        <vax-input-field caption="Ulica i numer" name="coordUnitStreet"
+                         placeholder="ulica i nr" :value="values.coordUnitStreet" maxlength="50"/>
+        <vax-input-field caption="Miasto" name="coordUnitCity"
+                         placeholder="nazwa miasta" :value="values.coordUnitCity" maxlength="50"/>
+        <vax-input-field caption="Kod pocztowy" name="coordUnitZipCode"
+                         placeholder="xx-xxx" :value="values.coordUnitZipCode" pattern="[0-9]{2}-?[0-9]{3}"
+                         maxlength="10"/>
+        <vax-input-field caption="Numer telefonu" name="coordUnitPhone" type="tel" pattern="[0-9 +]{9,16}"
+                         placeholder="xxx xxx xxx" :value="values.coordUnitPhone" maxlength="20"/>
+        <vax-input-field caption="Adres email" name="coordUnitEmail" type="email"
+                         placeholder="abc@xyz.com" :value="values.coordUnitEmail" maxlength="50"/>
+    </vax-fieldset>
 
- <div class="vax-margin-bottom">
-  <vax-personal-fieldset caption="Dane koordynatora miejskiego (1) - obligatoryjne" name="coord1" :values="values.coord1"
-    required />
-  <vax-personal-fieldset caption="Dane koordynatora miejskiego (2) - fakultatywne" name="coord2" :values="values.coord2"
-    v-if="!(values.coord2 && values.coord2.isPlaceholder)" collapsable
-    :initialCollapsed="!values.coord2" />
-  <vax-personal-fieldset caption="Dane koordynatora miejskiego (3) - fakultatywne" name="coord3" :values="values.coord3"
-    v-if="!(values.coord3 && values.coord3.isPlaceholder)" collapsable
-    :initialCollapsed="!values.coord3" />
- </div>
- 
-  <vax-fieldset class="vax-fieldset-tight vax-bold">
-   <vax-field>
-    <vax-checkbox name="forceDistrictInput" caption-class="vax-inline" input-class="vax-margin-right"
-      :checked="values.forceDistrictInput">
-     <b>Konieczność wprowadzania dzielnic</b><br />(w przeciwnym wypadku brak opcji dzielnicy w formularzach jednostek)
-    </vax-checkbox>
-   </vax-field>
-  </vax-fieldset>
-  
-  <vax-field caption="Uznawane formy dojazdów">
-    <rm-t12n-select type="checkbox" :options="values.campaign.t12ns" :i-checked="values.t12ns"
-     caption-class="box vax-box-small vax-text-center" :disabled="disabled" />
-  </vax-field>
-  
-  <vax-checkbox-array caption="Potrzebne materiały drukowane" :captions="printMaterialTypes"
-   name="printMaterialTypes" :options="values.campaign.printMaterialTypes" :i-checked="values.printMaterialTypes" />
+    <div class="vax-margin-bottom">
+        <vax-personal-fieldset caption="Dane koordynatora miejskiego (1) - obligatoryjne" name="coord1"
+                               :values="values.coord1"
+                               required/>
+        <vax-personal-fieldset caption="Dane koordynatora miejskiego (2) - fakultatywne" name="coord2"
+                               :values="values.coord2"
+                               v-if="!(values.coord2 && values.coord2.isPlaceholder)" collapsable
+                               :initialCollapsed="!values.coord2"/>
+        <vax-personal-fieldset caption="Dane koordynatora miejskiego (3) - fakultatywne" name="coord3"
+                               :values="values.coord3"
+                               v-if="!(values.coord3 && values.coord3.isPlaceholder)" collapsable
+                               :initialCollapsed="!values.coord3"/>
+    </div>
+
+    <vax-fieldset class="vax-fieldset-tight vax-bold">
+        <vax-field>
+            <vax-checkbox name="forceDistrictInput" caption-class="vax-inline" input-class="vax-margin-right"
+                          :checked="values.forceDistrictInput">
+                <b>Konieczność wprowadzania dzielnic</b><br/>(w przeciwnym wypadku brak opcji dzielnicy w formularzach
+                jednostek)
+            </vax-checkbox>
+        </vax-field>
+    </vax-fieldset>
+
+    <vax-field caption="Uznawane formy dojazdów">
+        <rm-t12n-select type="checkbox" :options="values.campaign.t12ns" :i-checked="values.t12ns"
+                        caption-class="box vax-box-small vax-text-center" :disabled="disabled"/>
+    </vax-field>
+
+    <vax-checkbox-array caption="Potrzebne materiały drukowane" :captions="printMaterialTypes"
+                        name="printMaterialTypes" :options="values.campaign.printMaterialTypes"
+                        :i-checked="values.printMaterialTypes"/>
 
 </vax-form>

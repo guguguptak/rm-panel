@@ -1,3 +1,43 @@
 {
-
+  "rewardsGroupAssign": [
+    {
+      "name": "duupa",
+      "clazzes": [
+        {
+          "name": "dupa",
+          "freqRatio": 2.3,
+          "amountRequired": 2,
+          "preferredGroupReward": "kaczka",
+          "unwantedGroupReward": "krowa",
+          "possibleRewardsNames": [
+            "dupaaal",
+            "cupaaaal",
+            "mamamal"
+          ],
+          "suggestedReward": "fff",
+          "canAssignReward": true
+        }
+      ]
+    },
+    {
+      "name": "cupa",
+      "clazzes": [
+        {
+          "name": "dupa",
+          "freqRatio": 2.3,
+          "amountRequired": 2,
+          "preferredGroupReward": "kaczka",
+          "unwantedGroupReward": "krowa",
+          "possibleRewardsNames": [
+            "dupaaal",
+            "cupaaaal",
+            "mamamal"
+          ],
+          "suggestedReward": "fff",
+          "canAssignReward": true
+        }
+      ]
+    }
+  ],
+  "canAssignAllRewards": true
 }
