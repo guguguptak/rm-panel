@@ -28,7 +28,7 @@
 		<td>Potwierdzenie<br />odbioru</td>
 	</tr>
   </thead>
-	
+
   <tbody v-for="(unitType,i) in jsonView.units">
 	<tr class="vax-table-row-lines vax-bold">
 		<th>{{ unitTypesPlural[i] }}</th>
@@ -40,7 +40,7 @@
 		<td class="vax-cell-hidden"></td>
 		<td>&nbsp;</td>
 	</tr>
-	<template v-for="(unit,i) in unitType">	
+	<template v-for="(unit,i) in unitType">
 	<tr>
 		<th>
 		  <div class="vax-flex-center-vertical">
@@ -73,7 +73,7 @@
 		<td>Potwierdzenie<br />odbioru</td>
 	</tr>
   </thead>
-	
+
   <tbody v-for="(unitType,i) in jsonView.units">
 	<tr class="vax-table-row-lines">
 	  <td><b>{{ unitTypesPlural[i] }}</b></td>
