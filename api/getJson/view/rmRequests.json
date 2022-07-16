@@ -8,7 +8,35 @@
     "adults": 20000,
     "clazzes": 3000
   },
-  "unitType": [
-  ]
+  "units": {
+    "unitType": [
+      {
+        "unitName": "blal",
+        "unitDistrict": "fjgghg",
+        "unitId": 1,
+        "declaredAdults": 2344,
+        "declaredKids": 4956,
+        "declaredClazzes": 345,
+        "countAdults": 4006,
+        "countKids": 49896,
+        "countClazzes": 95,
+        "verdictPending": true,
+        "isRemovable": true
+      },
+      {
+        "unitName": "fufu",
+        "unitDistrict": "slimorg",
+        "unitId": 2,
+        "declaredAdults": 2344,
+        "declaredKids": 8956,
+        "declaredClazzes": 345,
+        "countAdults": 4506,
+        "countKids": 49896,
+        "countClazzes": 595,
+        "verdictPending": true,
+        "isRemovable": true
+      }
+    ]
+  }
 }
 
