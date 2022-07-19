@@ -1,3 +1,53 @@
 {
-  "campaignStageInvalid": false
+  "campaignStageInvalid": false,
+  "campaign": {
+    "enabledDates": [
+      "21-02-2022"
+    ],
+    "campaignName": "",
+    "unitTypes": [
+      0,
+      1
+    ]
+  },
+  "city": {
+    "t12ns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "forceDistrictInput": []
+  },
+  "canChangeUnitType": true,
+  "unitSubtypesPossible": true,
+  "unitSubtype": [],
+  "unitCity": "",
+  "unitZipCode": "",
+  "unitPhone": "",
+  "unitEmail": "",
+  "coord1": "",
+  "coord2": "",
+  "coord3": "",
+  "t12ns": [],
+  "declaredClazzes": "",
+  "declaredKids": "",
+  "declaredAdults": "",
+  "unitType": 1,
+  "additionalFreeDatesValues": [
+  ],
+  "additionalFreeDatesStr": [
+  ],
+  "unitPrincipalName": "",
+  "agreements": [
+    0,
+    1,
+    2
+  ]
 }
+
+

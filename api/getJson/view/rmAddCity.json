@@ -1,16 +1,14 @@
 {
-  "values": {
-    "cityName": "",
-    "coordUnitName": "",
-    "coordUnitStreet": "",
-    "coordUnitCity": "",
-    "coordUnitZipCode": "",
-    "coordUnitPhone": "",
-    "coordUnitEmail": "",
-    "coord1": "",
-    "coord2": "",
-    "coord3": ""
-  },
+  "cityName": "",
+  "coordUnitName": "",
+  "coordUnitStreet": "",
+  "coordUnitCity": "",
+  "coordUnitZipCode": "",
+  "coordUnitPhone": "",
+  "coordUnitEmail": "",
+  "coord1": "",
+  "coord2": "",
+  "coord3": "",
   "campaign": {
     "printMaterialTypes": [
       0,
