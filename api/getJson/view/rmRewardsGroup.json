@@ -1,10 +1,16 @@
 {
   "rewards": [
     {
-      "rewardName": "cebula"
-    },
-    {
-      "priority": 1
+      "rewardName": "cebula",
+      "priority": 1,
+      "ageCategoryMin": 1,
+      "ageCategoryMax": 2,
+      "validFrom": "23-05-2022",
+      "validTo": "23-06-2022",
+      "canEdit": true,
+      "id": 2,
+      "totalCount": 2,
+      "remainingCount": 1
     }
   ]
 }
