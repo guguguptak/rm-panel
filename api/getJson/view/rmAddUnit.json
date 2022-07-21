@@ -24,8 +24,11 @@
     "forceDistrictInput": []
   },
   "canChangeUnitType": true,
-  "unitSubtypesPossible": true,
-  "unitSubtype": [],
+  "unitSubtypesPossible": [
+    0,
+    1
+  ],
+  "unitSubtype": "",
   "unitCity": "",
   "unitZipCode": "",
   "unitPhone": "",
