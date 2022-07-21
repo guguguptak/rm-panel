@@ -1,0 +1,53 @@
+{
+  "minCruises": 2,
+  "rewards": [
+    {
+      "rewardName": "krowa",
+      "priority": 1,
+      "ageCategoryMin": 2,
+      "ageCategoryMax": 4,
+      "cruisesMissedMin": 1,
+      "cruisesMissedMax": 3,
+      "countByAge": [
+        3,
+        0,
+        4,
+        0,
+        4
+      ],
+      "canEdit": true,
+      "id": 23,
+      "totalCount": 23,
+      "remainingCount": 3
+    },
+    {
+      "rewardName": "kaczka",
+      "priority": 4,
+      "ageCategoryMin": 1,
+      "ageCategoryMax": 4,
+      "cruisesMissedMin": 2,
+      "cruisesMissedMax": 2,
+      "countByAge": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "canEdit": true,
+      "id": 23,
+      "totalCount": 23,
+      "remainingCount": 3
+    }
+  ],
+  "participantsByAgeRewardless": [
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "canAssignPersonalRewards": true,
+  "canResetPersonalRewardsAssignment": true,
+  "personalRewardsConfirmed": true
+}
