@@ -1,95 +1,97 @@
 <vax-view v-if="jsonView" :view-data="jsonView" :response="response" :response-class="responseClass">
-<template v-if="!jsonView.contextMissing">
+  <template v-if="!jsonView.contextMissing">
 
-<table class="vax-table vax-bold vax-margin-right-wide">
-  <thead>
-    <tr class="vax-table-row-underline">
-      <td class="vax-cell-hidden"></td>
-      <td>uczniów/dzieci</td>
-      <td>pracowników</td>
-      <td>klas/grup</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Zadeklarowane:</td>
-      <td>{{ jsonView.declaredCounts.kids }}</td>
-      <td>{{ jsonView.declaredCounts.adults }}</td>
-      <td>{{ jsonView.declaredCounts.clazzes }}</td>
-    </tr>
-    <tr>
-      <td>Obliczone:</td>
-      <td class="hero vax-table-cell"
-       :class="jsonView.declaredCounts.kids === computedCountsKids ? 'is-success' : 'is-danger'">
-        {{ computedCountsKids }}
-      </td>
-      <td class="hero vax-table-cell"
-       :class="jsonView.declaredCounts.adults === computedCountsAdults ? 'is-success' : 'is-danger'">
-        {{ computedCountsAdults }}
-      </td>
-      <td class="hero vax-table-cell"
-       :class="jsonView.declaredCounts.clazzes === computedCountsClazzes ? 'is-success' : 'is-danger'">    
-        {{ computedCountsClazzes }}
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <table class="vax-table vax-bold vax-margin-right-wide">
+      <thead>
+      <tr class="vax-table-row-underline">
+        <td class="vax-cell-hidden"></td>
+        <td>uczniów/dzieci</td>
+        <td>pracowników</td>
+        <td>klas/grup</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Zadeklarowane:</td>
+        <td>{{ jsonView.declaredCounts.kids }}</td>
+        <td>{{ jsonView.declaredCounts.adults }}</td>
+        <td>{{ jsonView.declaredCounts.clazzes }}</td>
+      </tr>
+      <tr>
+        <td>Obliczone:</td>
+        <td class="hero vax-table-cell"
+            :class="jsonView.declaredCounts.kids === computedCountsKids ? 'is-success' : 'is-danger'">
+          {{ computedCountsKids }}
+        </td>
+        <td class="hero vax-table-cell"
+            :class="jsonView.declaredCounts.adults === computedCountsAdults ? 'is-success' : 'is-danger'">
+          {{ computedCountsAdults }}
+        </td>
+        <td class="hero vax-table-cell"
+            :class="jsonView.declaredCounts.clazzes === computedCountsClazzes ? 'is-success' : 'is-danger'">
+          {{ computedCountsClazzes }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
 
-<form v-if="jsonView.canEdit">
-<vax-file-input class="has-name is-boxed" />
-<vax-button class="vax-margin-top-auto" button-class="is-warning" @click="importFromCsv">
-  Importuj liczebności z CSV
-</vax-button>
-</form>
+    <form v-if="jsonView.canEdit">
+      <vax-file-input class="has-name is-boxed"/>
+      <vax-button class="vax-margin-top-auto" button-class="is-warning" @click="importFromCsv">
+        Importuj liczebności z CSV
+      </vax-button>
+    </form>
 
-<vax-form class="vax-margin-top" div-fieldset name="defineClazzes"
- :action="postUrl" method="POST" @submit.prevent="submitPostUpdateContext" :has-submit="jsonView.canEdit">
+    <vax-form class="vax-margin-top" div-fieldset name="defineClazzes"
+              :action="postUrl" method="POST" @submit.prevent="submitPostUpdateContext" :has-submit="jsonView.canEdit">
 
-<div class="vax-flex vax-margin-bottom">
+      <div class="vax-flex vax-margin-bottom">
 
-<table class="vax-table vax-margin-right vax-inline-table">
-  <thead>
-    <tr class="vax-table-row-underline"><th>Poziom</th></tr>
-  </thead>
-  <tbody>
-   <template v-for="i in jsonView.levelCounts.length">
-    <tr v-for="levelName in levelNamesByUnitType[jsonView.unitType][i - 1]">
-      <th>
-        <div style="margin: 2px 0;" class="vax-icon-small-height vax-flex-center-vertical vax-text-large">
-          {{ levelName }}
+        <table class="vax-table vax-margin-right vax-inline-table">
+          <thead>
+          <tr class="vax-table-row-underline">
+            <th>Poziom</th>
+          </tr>
+          </thead>
+          <tbody>
+          <template v-for="(cnt,i) in jsonView.levelCounts">
+            <tr v-for="j in cnt">
+              <th>
+                <div style="margin: 2px 0;" class="vax-icon-small-height vax-flex-center-vertical vax-text-large">
+                  {{ levelNamesByUnitType[jsonView.unitType][i][j - 1] }}
+                </div>
+              </th>
+            </tr>
+          </template>
+          </tbody>
+        </table>
+
+        <div class="vax-wrapper-scrollbar-x vax-inline-block">
+          <table class="vax-table vax-inline-table vax-table-hover">
+            <thead>
+            <tr class="vax-table-row-underline">
+              <td v-for="i in jsonView.maxOrdinal">
+                {{ String.fromCharCode( "a".charCodeAt( 0 ) + i - 1 ) }}
+              </td>
+            </tr>
+            </thead>
+            <tbody id="clazz-data-table">
+            <template v-for="(cnt,i) in jsonView.levelCounts">
+              <tr v-for="j in cnt">
+                <td template v-for="k in jsonView.maxOrdinal">
+                  <input type="number" min="0" max="99"
+                         :name="'declCounts['+i+']['+(j-1)+']['+(k-1)+']'" :value="getCount(i,j-1,k-1)"
+                         class="input vax-small-icon-height" placeholder="0" :disabled="!jsonView.canEdit"/>
+                </td>
+              </tr>
+            </template>
+            </tbody>
+          </table>
         </div>
-      </th>
-    </tr>
-   </template>
-  </tbody>
-</table>
 
-<div class="vax-wrapper-scrollbar-x vax-inline-block">
-<table class="vax-table vax-inline-table vax-table-hover">
-  <thead>
-    <tr class="vax-table-row-underline">
-      <td v-for="i in jsonView.maxOrdinal">
-        {{ String.fromCharCode( "a".charCodeAt( 0 ) + i - 1 ) }}
-      </td>
-    </tr>
-  </thead>
-  <tbody id="clazz-data-table">
-   <template v-for="(cnt,i) in jsonView.levelCounts">
-    <tr v-for="j in cnt">
-      <td template v-for="k in jsonView.maxOrdinal">
-        <input type="number" min="0" max="99"
-         :name="'declCounts['+i+']['+(j-1)+']['+(k-1)+']'" :value="getCount(i,j-1,k-1)"
-         class="input vax-small-icon-height" placeholder="0" :disabled="!jsonView.canEdit" />
-      </td>
-    </tr>
-   </template>
-  </tbody>
-</table>
-</div>
+      </div>
 
-</div>
+    </vax-form>
 
-</vax-form>
-
-</template>
+  </template>
 </vax-view>
