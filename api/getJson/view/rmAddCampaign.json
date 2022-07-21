@@ -20,9 +20,6 @@
     0,
     1,
     2,
-    3,
-    4,
-    5,
     6,
     7
   ],
@@ -34,21 +31,9 @@
     0,
     1
   ],
-  "journalThreshold": [
-    0,
-    1,
-    2
-  ],
-  "unitJournalThreshold": [
-    1,
-    2,
-    3,
-    4
-  ],
-  "daysBackAllowed": [
-    2,
-    3
-  ],
+  "journalThreshold": 30,
+  "unitJournalThreshold": 60,
+  "daysBackAllowed": 5,
   "printMaterialTypesPossible": [
     0,
     1,

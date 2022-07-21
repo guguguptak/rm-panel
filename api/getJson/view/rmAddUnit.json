@@ -21,16 +21,20 @@
       6,
       7
     ],
-    "forceDistrictInput": []
+    "forceDistrictInput": true
   },
   "canChangeUnitType": true,
   "unitSubtypesPossible": [
     0,
     1
   ],
+  "unitStreet": "",
+  "unitName": "",
+  "unitFullName": "",
   "unitSubtype": "",
   "unitCity": "",
   "unitZipCode": "",
+  "unitDistrict": "",
   "unitPhone": "",
   "unitEmail": "",
   "coord1": "",
@@ -43,8 +47,7 @@
   "unitType": 1,
   "additionalFreeDatesValues": [
   ],
-  "additionalFreeDatesStr": [
-  ],
+  "additionalFreeDatesStr": "",
   "unitPrincipalName": "",
   "agreements": [
     0,
