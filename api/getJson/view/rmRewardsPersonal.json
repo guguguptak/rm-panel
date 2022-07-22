@@ -17,7 +17,7 @@
       ],
       "canEdit": true,
       "id": 23,
-      "totalCount": 23,
+      "totalCount": "",
       "remainingCount": 3
     },
     {
@@ -28,11 +28,11 @@
       "cruisesMissedMin": 2,
       "cruisesMissedMax": 2,
       "countByAge": [
-        0,
-        1,
-        2,
-        3,
-        4
+        12,
+        34,
+        5,
+        6,
+        1
       ],
       "canEdit": true,
       "id": 23,
@@ -41,11 +41,11 @@
     }
   ],
   "participantsByAgeRewardless": [
-    3,
+    32,
     4,
     5,
     6,
-    7
+    1
   ],
   "canAssignPersonalRewards": true,
   "canResetPersonalRewardsAssignment": true,

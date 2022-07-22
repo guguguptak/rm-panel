@@ -1,0 +1,36 @@
+{
+  "cities": [
+    {
+      "name": "Warszawa",
+      "trophy": "diamond",
+      "journalsOk": true,
+      "cruiseCount": 3855686,
+      "activeCount": 2394,
+      "freqRatio": 0.6
+    },
+    {
+      "name": "Krakow",
+      "trophy": "gold",
+      "journalsOk": true,
+      "cruiseCount": 3855686,
+      "activeCount": 45,
+      "freqRatio": 0.4
+    },
+    {
+      "name": "Poznan",
+      "trophy": "gold",
+      "journalsOk": false,
+      "cruiseCount": 384,
+      "activeCount": 4,
+      "freqRatio": 0.2
+    },
+    {
+      "name": "Gdynia",
+      "trophy": "silver",
+      "journalsOk": true,
+      "cruiseCount": 45566,
+      "activeCount": 475,
+      "freqRatio": 0.7
+    }
+  ]
+}

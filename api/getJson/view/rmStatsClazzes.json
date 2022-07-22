@@ -1,0 +1,20 @@
+{
+  "clazzes": [
+    {
+      "name": "2b",
+      "trophy": "silver",
+      "journalsOk": true,
+      "cruiseCount": 345,
+      "activeCount": 4,
+      "freqRatio": 0.43
+    },
+    {
+      "name": "3a",
+      "trophy": "bronze",
+      "journalsOk": true,
+      "cruiseCount": 234,
+      "activeCount": 7,
+      "freqRatio": 0.33
+    }
+  ]
+}
