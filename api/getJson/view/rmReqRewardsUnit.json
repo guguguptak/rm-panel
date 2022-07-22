@@ -1,0 +1,55 @@
+{
+  "possiblePersonalRewards": [
+    {
+      "rewardName": "kura",
+      "ageCategoryMin": 1,
+      "ageCategoryMax": 2
+    },
+    {
+      "rewardName": "kaczka",
+      "ageCategoryMin": 1,
+      "ageCategoryMax": 2
+    }
+  ],
+  "clazzes": [
+    {
+      "name": "2B",
+      "validFrom": "24-03-2023",
+      "validTo": "27-03-2024",
+      "trophy": "diamond",
+      "personalRewardCount": [
+        2,
+        3
+      ],
+      "groupReward": "Wycieczka do Poznania"
+    },
+    {
+      "name": "3A",
+      "validFrom": "24-03-2023",
+      "validTo": "27-03-2024",
+      "trophy": "gold",
+      "personalRewardCount": [
+        2,
+        3
+      ],
+      "groupReward": "Roczny zapas przypraw Knorr dla całej klasy"
+    }
+  ],
+  "possibleGroupRewards": [
+    {
+      "name": "Wycieczka do Poznania",
+      "validFrom": "24-03-2023",
+      "validTo": "27-03-2024"
+    },
+    {
+      "name": "Wycieczka do zoo",
+      "validFrom": "24-03-2023",
+      "validTo": "27-03-2024"
+    },
+    {
+      "name": "Roczny zapas przypraw Knorr dla całej klasy",
+      "validFrom": "24-03-2023",
+      "validTo": "27-03-2024"
+    }
+  ]
+}
